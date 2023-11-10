@@ -9,8 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        foreground: { DEFAULT: "#f5f5f5", light: "#adadad" },
+        primary: { DEFAULT: "#9333ea", soft: "#a855f7" },
+        foreground: { DEFAULT: "#f5f5f5", soft: "#adadad" },
         background: "#101010",
+      },
+      animation: {
+        ripple: "ripple 600ms linear",
+      },
+
+      keyframes: {
+        ripple: {
+          "0%": { opacity: "40%", transform: "scale(0)" },
+          "100%": { opacity: "0%", transform: "scale(3)" },
+        },
       },
     },
   },
