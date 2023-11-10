@@ -1,14 +1,28 @@
 import HomeLayout from "@/layouts/homeLayout";
 
 import Container from "@/components/shared/container";
+import Button from "@/components/shared/button";
 
 const Page = () => {
   return (
     <Container className="flex flex-col items-center justify-center">
-      <span className="text-5xl font-bold text-foreground mb-1.5">Lorem ipsum dolor sit.</span>
-      <p className="text-xl text-foreground-soft max-w-lg text-center">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, quibusdam.
-      </p>
+      {/* hero  */}
+      <section className="mb-20 text-center">
+        <h2 className="md:text-6xl text-4xl tracking-tight font-bold text-foreground">Next Generation</h2>
+        <h2 className="md:text-6xl text-4xl tracking-tight font-bold text-foreground mb-2">
+          Discord Moderation
+        </h2>
+
+        <p className="text-foreground-soft text-lg md:text-2xl mb-4">All in one AI powered moderation bot</p>
+
+        {/* button group  */}
+        <div className="flex items-center justify-center">
+          <Button className="mr-4 px-10 md:px-16 py-6 text-xl">Vote</Button>{" "}
+          <Button className="px-10 md:px-16 py-6 text-xl" variant="outline">
+            Invite
+          </Button>
+        </div>
+      </section>
     </Container>
   );
 };
