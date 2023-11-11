@@ -12,7 +12,7 @@ type AppPropsWithLayout = AppProps & {
   Component: PageWithLayout;
 };
 
-const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400", "700"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400", "500", "700"] });
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
