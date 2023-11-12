@@ -17,9 +17,10 @@ const Navbar = () => {
       <span className="font-bold text-xl font-mono">Sweet</span>
 
       <div className="space-x-2 last:mr-0 hidden md:inline">
-        {links.map((link) => {
+        {links.map((link, i) => {
           return (
             <Button
+              key={i}
               className="py-6 font-medium tracking-wide text-lg text-primary-soft"
               variant="ghost"
               href={link.url}>
