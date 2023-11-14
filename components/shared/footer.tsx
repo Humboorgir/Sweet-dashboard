@@ -38,9 +38,10 @@ const Footer = ({ className, ...props }: Props) => {
           <p className="text-foreground-soft text-base ">Sweet 2023</p>
         </div>
         <div className="flex flex-col">
-          {links.slice(0, 3).map((link) => {
+          {links.slice(0, 3).map((link, i) => {
             return (
               <Button
+                key={i}
                 variant="ghost"
                 className="text-foreground-soft h-auto w-auto py-0.5 uppercase"
                 href={link.url}>
