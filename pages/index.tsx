@@ -54,9 +54,11 @@ const Page = () => {
           </p>
 
           {/* button group  */}
-          <div className="flex items-center justify-center mb-5">
-            <Button className="mr-4 px-10 md:px-16 py-6 text-xl">Vote</Button>{" "}
-            <Button className="px-10 md:px-16 py-6 text-xl" variant="outline">
+          <div className="flex flex-col md:flex-row items-center justify-center mb-5">
+            <Button className="w-[90%] md:w-auto mb-4 md:mb-0 md:mr-4 px-10 md:px-16 py-6 text-xl">
+              Vote
+            </Button>{" "}
+            <Button className="w-[90%] md:w-auto px-10 md:px-16 py-6 text-xl" variant="outline">
               Invite
             </Button>
           </div>
