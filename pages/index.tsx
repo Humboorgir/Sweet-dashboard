@@ -45,7 +45,7 @@ const Page = () => {
           <h2 className="lg:text-6xl md:text-[43px] text-4xl tracking-tight font-bold text-foreground">
             Next Generation
           </h2>
-          <h2 className="lg:text-6xl md:text-[43px] text-4xl tracking-tight font-bold text-foreground mb-2">
+          <h2 className="lg:text-6xl md:text-[43px] text-4xl w-max tracking-tight font-bold text-foreground mb-2">
             Discord Moderation
           </h2>
 
@@ -55,11 +55,11 @@ const Page = () => {
 
           {/* button group  */}
           <div className="flex flex-col md:flex-row items-center justify-center mb-5">
-            <Button className="w-[90%] md:w-auto mb-4 md:mb-0 md:mr-4 px-10 md:px-16 py-6 text-xl">
-              Vote
-            </Button>{" "}
-            <Button className="w-[90%] md:w-auto px-10 md:px-16 py-6 text-xl" variant="outline">
+            <Button className="w-[90%] md:w-36 lg:w-44 mb-4 md:mb-0 md:mr-4 px-10 md:px-16 py-6 text-xl">
               Invite
+            </Button>
+            <Button className="w-[90%] md:w-36 lg:w-44 px-10 md:px-16 py-6 text-xl" variant="outline">
+              Dashboard
             </Button>
           </div>
         </div>
