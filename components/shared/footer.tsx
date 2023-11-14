@@ -26,24 +26,29 @@ const Footer = ({ className, ...props }: Props) => {
   ];
   return (
     <footer
-      className={cn("w-full border-t-2 border-t-neutral-800 py-12 flex flex-col items-center", className)}
+      className={cn(
+        "w-full border-t-2 border-t-neutral-800 py-10 flex flex-col lg:items-center px-[20%] ",
+        className
+      )}
       {...props}>
       {/* links  */}
       <div
-        className="flex flex-col lg:flex-row items-center flex-wrap 
-      justify-between space-x-8 space-y-8 w-full px-[20%] mb-16">
+        className="flex flex-col lg:flex-row lg:items-center flex-wrap 
+      justify-between lg:space-x-8 space-y-8 w-full mb-14">
         {/* brand logo & name */}
         <div>
           <h3 className="text-foreground text-4xl md:text-5xl tracking-tight font-bold">LOGO</h3>
           <p className="text-foreground-soft text-base ">Sweet 2023</p>
         </div>
+
         <div className="flex flex-col">
+          <h3 className="font-bold text-foreground uppercase px-3">Links</h3>
           {links.slice(0, 3).map((link, i) => {
             return (
               <Button
                 key={i}
                 variant="ghost"
-                className="text-foreground-soft h-auto w-auto py-0.5 uppercase"
+                className="text-foreground-soft h-auto flex justify-start py-0.5 uppercase"
                 href={link.url}>
                 {link.title}
               </Button>
@@ -51,11 +56,12 @@ const Footer = ({ className, ...props }: Props) => {
           })}
         </div>
         <div className="flex flex-col">
+          <h3 className="font-bold text-foreground uppercase px-3">Team</h3>
           {links.slice(3, 6).map((link) => {
             return (
               <Button
                 variant="ghost"
-                className="text-foreground-soft h-auto w-auto py-0.5 uppercase"
+                className="text-foreground-soft h-auto flex justify-start w-auto py-0.5 uppercase"
                 href={link.url}>
                 {link.title}
               </Button>
@@ -63,11 +69,12 @@ const Footer = ({ className, ...props }: Props) => {
           })}
         </div>
         <div className="flex flex-col">
+          <h3 className="font-bold text-foreground uppercase px-3">Sweet</h3>
           {links.slice(6, 9).map((link) => {
             return (
               <Button
                 variant="ghost"
-                className="text-foreground-soft h-auto w-auto py-0.5 uppercase"
+                className="text-foreground-soft h-auto flex justify-start w-auto py-0.5 uppercase"
                 href={link.url}>
                 {link.title}
               </Button>
@@ -76,7 +83,7 @@ const Footer = ({ className, ...props }: Props) => {
         </div>
       </div>
       {/* copyright notice and social media  */}
-      <div className="text-foreground-soft text-center">
+      <div className="text-foreground-soft text-center w-fit">
         <div className="flex justify-center items-center space-x-6 text-3xl mb-4">
           {[Github, Discord, Youtube, Instagram].map((El) => {
             return (
