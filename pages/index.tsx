@@ -58,7 +58,10 @@ const Page = () => {
             <Button className="w-[90%] md:w-36 lg:w-44 mb-4 md:mb-0 md:mr-4 px-10 md:px-16 py-6 text-xl">
               Invite
             </Button>
-            <Button className="w-[90%] md:w-36 lg:w-44 px-10 md:px-16 py-6 text-xl" variant="outline">
+            <Button
+              href="/dashboard"
+              className="w-[90%] md:w-36 lg:w-44 px-10 md:px-16 py-6 text-xl"
+              variant="outline">
               Dashboard
             </Button>
           </div>
