@@ -17,6 +17,7 @@ export const authOptions: AuthOptions = {
       if (!session.user) return session;
       session.user.id = token.id as string;
       session.user.name = token.name!;
+      session.accessToken = token.accessToken as string;
       return session;
     },
     jwt({ token, account, profile }) {
