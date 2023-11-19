@@ -1,19 +1,14 @@
 import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
 
-import Footer from "@/components/shared/footer";
-
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid grid-rows-[1fr,auto] min-h-screen bg-background text-foreground">
-      <div className="grid grid-cols-[auto,1fr]">
-        <Sidebar />
-        <div>
-          <Header />
-          {children}
-        </div>
+    <nav className="min-h-screen grid grid-cols-[auto,1fr] bg-background text-foreground">
+      <Sidebar />
+      <div className="fixed w-full h-full ml-[60px]">
+        <Header />
+        {children}
       </div>
-      <Footer />
-    </div>
+    </nav>
   );
 }
