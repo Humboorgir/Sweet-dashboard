@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Scrollbar customizations:  */
-
-/* webkit browsers  */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,8 +19,11 @@
   background: #888;
 }
 
-/* firefox */
 :root {
   scrollbar-color: #555 #101010 !important;
   scrollbar-width: 8px !important;
+}
+
+.no-scrollbar {
+  scrollbar-width: 4px !important;
 }

@@ -11,9 +11,9 @@ const Server: FC<Props> = ({ server, isLoading }) => {
   const iconUrl = `https://cdn.discordapp.com/icons/${server.id}/${server.icon}`;
   return (
     <li
-      className={`relative flex items-center justify-center
-    h-14 w-14 my-2 mx-auto hover:bg-primary bg-gray-800 text-white
-    hover:rounded-xl rounded-3xl transition-all duration-200 ease-in-out cursor-pointer group
+      className={`relative h-[60px] w-[60px] my-2.5 mx-auto flex items-center
+      justify-center hover:bg-primary bg-gray-800 hover:rounded-xl 
+      rounded-3xl transition-all duration-200 ease-in-out cursor-pointer group
     ${isLoading && "animate-pulse"}`}
       style={{
         backgroundImage: `url(${iconUrl})`,
@@ -24,7 +24,7 @@ const Server: FC<Props> = ({ server, isLoading }) => {
       <span
         className="absolute p-2 m-2 min-w-max left-[60px] rounded-md shadow-md bg-zinc-950 
     text-base group-hover:scale-100 opacity-0 group-hover:opacity-100
-    transition-all ease-in-out duration-100 scale-0 origin-left">
+    transition-all ease-in-out duration-100 scale-0 origin-left z-50">
         {server.name}
       </span>
     </li>
