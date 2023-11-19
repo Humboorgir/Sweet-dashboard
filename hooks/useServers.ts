@@ -1,30 +1,39 @@
-import useSWR from "swr";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
+import { useState, useEffect } from "react";
 
 export default function useServers() {
-  const { data: session } = useSession();
-  const fetcher = (url: string) =>
+  const { data: session, status } = useSession();
+  const [servers, setServers] = useState([
+    // i know this is not the best approach but it does the job for now
+    { name: "Loading", id: "Loading", icon: "Loading" },
+    { name: "Loading", id: "Loading", icon: "Loading" },
+    { name: "Loading", id: "Loading", icon: "Loading" },
+    { name: "Loading", id: "Loading", icon: "Loading" },
+    { name: "Loading", id: "Loading", icon: "Loading" },
+    { name: "Loading", id: "Loading", icon: "Loading" },
+  ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!session?.accessToken) return;
+    const url = "https://discord.com/api/users/@me/guilds?scope=guilds";
     axios
       .get(url, {
         headers: {
-          Authorization: `Bearer ${session!.accessToken}`,
+          Authorization: `Bearer ${session?.accessToken}`,
         },
       })
-      .then((res) => res.data);
+      .then((res) => {
+        setServers(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+  }, [status]);
 
-  const {
-    isLoading,
-    error,
-    data,
-    mutate: mutateData,
-  } = useSWR<{ name: string; icon: string; id: string }[]>(
-    "https://discord.com/api/users/@me/guilds?scope=guilds",
-    fetcher
-  );
-
-  return { isLoading, data, error, mutateData };
+  return { servers, loading, error, setServers };
 }
