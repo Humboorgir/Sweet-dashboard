@@ -16,6 +16,7 @@ const config: Config = {
       },
       animation: {
         ripple: "ripple 600ms linear",
+        scaleIn: "scaleIn 100ms ease-out",
       },
 
       keyframes: {
