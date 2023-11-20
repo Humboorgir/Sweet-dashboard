@@ -3,12 +3,12 @@ import Header from "@/components/dashboard/header";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <nav className="min-h-screen grid grid-cols-[auto,1fr] bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground">
       <Sidebar />
-      <div className="fixed w-full h-full ml-[60px]">
+      <div className="absolute left-[80px] top-0 right-0 bottom-0">
         <Header />
         {children}
       </div>
-    </nav>
+    </div>
   );
 }
