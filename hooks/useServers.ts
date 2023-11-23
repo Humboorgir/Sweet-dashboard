@@ -25,8 +25,11 @@ export default function useServers() {
           Authorization: `Bearer ${session?.accessToken}`,
         },
       })
+      .then((res: any) =>
+        res.data.filter((guild: any) => (guild.permissions & 0x0000000000000020) == 0x0000000000000020)
+      )
       .then((res) => {
-        setServers(res.data);
+        setServers(res);
         setLoading(false);
       })
       .catch(() => {
