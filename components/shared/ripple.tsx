@@ -19,9 +19,10 @@ const useDebouncedRippleCleanUp = (rippleCount: number, duration: number, cleanU
 interface Props {
   duration?: number;
   rippleColor?: string;
+  children?: React.ReactNode;
 }
 
-const Ripple = ({ duration = 600, rippleColor = "#aa00ff" }: Props) => {
+const Ripple = ({ duration = 600, rippleColor = "#aa00ff", children }: Props) => {
   interface Ripple {
     y: number;
     x: number;
@@ -53,6 +54,7 @@ const Ripple = ({ duration = 600, rippleColor = "#aa00ff" }: Props) => {
 
   return (
     <div className="absolute bottom-0 left-0 right-0 top-0" onClick={addRipple}>
+      {children}
       {rippleArray.length > 0 &&
         rippleArray.map((ripple, index) => {
           return (

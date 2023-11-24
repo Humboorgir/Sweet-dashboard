@@ -1,11 +1,11 @@
 import type { FC } from "react";
-import type { Server } from "@/types";
+import type { PartialGuild } from "@/types";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
 
 interface Props {
-  server: Server;
+  server: PartialGuild;
   isLoading: Boolean;
 }
 

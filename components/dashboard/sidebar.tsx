@@ -1,9 +1,11 @@
 import Server from "@/components/dashboard/server";
-import useServers from "@/hooks/useServers";
+import { RootState } from "@/redux/store";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const { servers, loading, error } = useServers();
+  const servers = useSelector((state: RootState) => state.userGuilds.data);
+  const loading = !servers.length || servers[0].id == "Loading";
   if (!servers) return <div>Loading</div>;
 
   return (
