@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import { Roboto } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { Provider as ReduxProvider } from "@/redux/provider";
 
 export type PageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -20,7 +21,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <SessionProvider>
-      <main className={roboto.className}>{getLayout(<Component {...pageProps} />)}</main>
+      <ReduxProvider>
+        <main className={roboto.className}>{getLayout(<Component {...pageProps} />)}</main>
+      </ReduxProvider>
     </SessionProvider>
   );
 }
