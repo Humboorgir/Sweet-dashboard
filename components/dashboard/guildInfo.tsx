@@ -23,7 +23,7 @@ const GuildInfo = () => {
   return (
     <div
       className="fixed left-[80px] w-[280px] border-2 border-neutral-800 rounded-3xl min-h-screen
-      my-5 py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/50 to-secondary/10">
+      my-5 py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/60 to-secondary/30">
       <Image
         className="rounded-full mb-3 mx-auto bg-neutral-800"
         src={iconUrl}
@@ -35,18 +35,27 @@ const GuildInfo = () => {
       <h3 className="text-lg font-bold mb-8">{guild.name}</h3>
       {/* TODO: make a seperate Category component for this */}
       {/* category title  */}
-      <h3 className="text-sm tracking-wider text-foreground-soft flex items-center mb-1 mr-auto font-normal">
+      <h3 className="text-sm tracking-wider text-foreground/70 flex items-center mb-1 mr-auto font-normal">
         <ArrowDown className="text-sm mr-1.5 mb-1" /> Settings
       </h3>
       <div className="min-w-[94%] ml-2">
-        <Button variant="ghost" className="flex items-center hover:bg-secondary/10 w-full justify-start">
-          <Hand className="text-sm mr-2" /> Welcome & Goodbye
+        <Button
+          variant="ghost"
+          className="flex items-center hover:bg-secondary/30 w-full justify-start
+        bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
+          <Hand className="text-sm mr-2 text-foreground/80" /> Welcome & Goodbye
         </Button>
-        <Button variant="ghost" className="flex items-center hover:bg-secondary/10 w-full justify-start">
-          <Robot className="text-sm mr-2" /> Automod
+        <Button
+          variant="ghost"
+          className="flex items-center hover:bg-secondary/30 w-full justify-start
+           bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
+          <Robot className="text-sm mr-2 text-foreground/80" /> Automod
         </Button>
-        <Button variant="ghost" className="flex items-center hover:bg-secondary/10 w-full justify-start">
-          <Send className="text-sm mr-2" /> Auto responder
+        <Button
+          variant="ghost"
+          className="flex items-center hover:bg-secondary/30 w-full justify-start
+           bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
+          <Send className="text-sm mr-2 text-foreground/80" /> Auto responder
         </Button>
       </div>
     </div>
