@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useGuilds();
   useMutualGuilds();
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen bg-neutral-900 text-foreground">
       <Sidebar />
       {/* displayed only if the user's viewing a server's dashboard */}
       <GuildInfo />

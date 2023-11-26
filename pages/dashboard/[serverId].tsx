@@ -1,5 +1,6 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
 import TextArea from "@/components/shared/textarea";
+import Switch from "@/components/shared/switch";
 import Button from "@/components/shared/button";
 
 import { useState } from "react";
@@ -29,23 +30,24 @@ const Page = () => {
 
   // Main page
   return (
-    <div className="p-5 md:p-8 max-w-[calc(100vw-100px)]">
-      <h2 className="text-xl text-foreground">Welcome messages</h2>
-      <p className="text-foreground-soft text-base mb-2.5">Sent when a new user joins the server.</p>
-      <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
-        <input
-          onChange={(e) => setWelcomeMsgsEnabled(e.target.checked)}
-          type="checkbox"
-          className="mb-0.5 mr-1.5 checked:accent-secondary"
+    <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+      <div className="flex items-center">
+        <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
+        <Switch
+          id="welcomeMsgsCheckbox"
+          onCheckedChange={(checked: boolean) => setWelcomeMsgsEnabled(checked)}
         />
-        <span className="text-foreground">Enable</span>
+      </div>
+      <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
+      <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
         <TextArea placeholder="Welcome message" className="mt-4 col-span-5" disabled={!welcomeMsgsEnabled} />
       </div>
-
       <Button
         disabled={!welcomeMsgsEnabled}
-        className="text-secondary border-secondary hover:bg-secondary/20 mt-5"
-        variant="outline">
+        className="text-white bg-secondary/80 hover:bg-secondary/60 mt-5"
+        rippleColor="#7C72FF"
+        variant="default"
+        size="lg">
         Save changes
       </Button>
     </div>
