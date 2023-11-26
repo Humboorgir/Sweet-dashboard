@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .text-gradient {
+    @apply bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-soft {
+    @apply bg-gradient-to-br from-foreground-soft to-foreground/30 bg-clip-text text-transparent;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
