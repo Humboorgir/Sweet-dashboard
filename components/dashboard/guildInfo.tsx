@@ -35,7 +35,7 @@ const GuildInfo = () => {
       <h3 className="text-lg font-bold mb-8">{guild.name}</h3>
       {/* TODO: make a seperate Category component for this */}
       {/* category title  */}
-      <h3 className="text-sm uppercase text-foreground-soft flex items-center mb-1 mr-auto font-normal">
+      <h3 className="text-sm tracking-wider text-foreground-soft flex items-center mb-1 mr-auto font-normal">
         <ArrowDown className="text-sm mr-1.5 mb-1" /> Settings
       </h3>
       <div className="min-w-[94%] ml-2">
