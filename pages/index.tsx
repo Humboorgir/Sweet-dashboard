@@ -9,6 +9,8 @@ import Image from "next/image";
 import { HiOutlineWrench as Wrench } from "react-icons/hi2";
 import { TbMoodKid as Kid } from "react-icons/tb";
 import { BsCodeSlash as Code } from "react-icons/bs";
+import { WiNightLightning as Lightning } from "react-icons/wi";
+import { CiGlobe as Globe } from "react-icons/ci";
 
 const Page = () => {
   const features = [
@@ -32,6 +34,20 @@ const Page = () => {
       imgSrc: "/opensource.svg",
       imgWidth: 500,
       icon: <Code />,
+    },
+    {
+      title: "Fast",
+      description: "Optimized in every possible way to deliver the best possible experience",
+      imgSrc: "/fast.svg",
+      imgWidth: 400,
+      icon: <Lightning />,
+    },
+    {
+      title: "Active community",
+      description: "Active support and a large community of people that are always there to help you",
+      imgSrc: "/globe.svg",
+      imgWidth: 440,
+      icon: <Globe />,
     },
   ];
   return (
