@@ -9,7 +9,7 @@ const Sidebar = () => {
   if (!guilds) return <div>Loading</div>;
 
   return (
-    <div className="no-scrollbar px-auto py-2 fixed z-50 h-screen w-[80px] gap-3 overflow-y-auto pt-3">
+    <div className="no-scrollbar px-auto py-2 fixed z-10 h-screen w-[80px] gap-3 overflow-y-auto pt-3">
       <TooltipProvider>
         {guilds.map((guild, i) => {
           return <Guild key={i} guild={guild} isLoading={loading} />;
