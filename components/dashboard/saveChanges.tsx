@@ -1,20 +1,21 @@
 import Button from "@/components/shared/button";
+
 import { cn } from "@/lib/utils";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
-type Props = {
-  goodbyeMsgsEnabled: boolean;
-};
+const SaveChangesButton = () => {
+  let modified;
+  const state = useSelector((state: RootState) => state.guildSettings);
+  if (state.welcomeMsgsEnabled == true || state.goodbyeMsgsEnabled == true) modified = true;
 
-const SaveChangesButton = ({ goodbyeMsgsEnabled }: Props) => {
-  // NOTE: the logic is not properly implemented (yet),
-  // goodbyeMsgsEnabled is just used for testing purposes here.
   return (
     <div
       className={cn(
         `fixed bottom-10 left-[50%] translate-x-[-50%] translate-y-[20px] transition-all
        opacity-0 flex justify-between items-center bg-black z-20 lg:ml-24 p-4 rounded-md
         duration-150 w-[85vw] max-w-[800px] flex-col md:flex-row origin-bottom`,
-        goodbyeMsgsEnabled && "opacity-100 translate-y-0"
+        modified && "opacity-100 translate-y-0"
       )}>
       <h3 className="text-lg mb-4 md:mb-0">Careful — you have unsaved changes!</h3>
       <div>

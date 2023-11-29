@@ -3,19 +3,22 @@ import SaveChanges from "@/components/dashboard/saveChanges";
 import TextArea from "@/components/shared/textarea";
 import Switch from "@/components/shared/switch";
 
-import { useState } from "react";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSettings";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
 const Page = () => {
-  const [welcomeMsgsEnabled, setWelcomeMsgsEnabled] = useState(false);
-  const [goodbyeMsgsEnabled, setGoodbyeMsgsEnabled] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const error = useSelector((state: RootState) => state.error.message);
+  const welcomeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.welcomeMsgsEnabled);
+  const goodbyeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.goodbyeMsgsEnabled);
+
   if (error) console.log(error);
 
   const { serverId } = router.query;
@@ -33,13 +36,13 @@ const Page = () => {
   return (
     <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
       {/* fixed element, displayed conditionally  */}
-      <SaveChanges goodbyeMsgsEnabled={goodbyeMsgsEnabled} />
+      <SaveChanges />
       {/* Welcome messages  */}
       <div className="flex items-center">
         <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
         <Switch
           id="welcomeMsgsCheckbox"
-          onCheckedChange={(checked: boolean) => setWelcomeMsgsEnabled(checked)}
+          onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
         />
       </div>
       <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
@@ -52,7 +55,7 @@ const Page = () => {
         <h2 className="text-4xl text-gradient font-bold mr-3">Goodbye messages</h2>
         <Switch
           id="goodbyeMsgsCheckbox"
-          onCheckedChange={(checked: boolean) => setGoodbyeMsgsEnabled(checked)}
+          onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
         />
       </div>
       <p className="text-gradient-soft text-xl mb-2.5">Sent when a user leaves the server.</p>
