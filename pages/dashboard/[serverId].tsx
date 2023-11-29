@@ -12,6 +12,7 @@ import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
 const Page = () => {
   const [welcomeMsgsEnabled, setWelcomeMsgsEnabled] = useState(false);
+  const [goodbyeMsgsEnabled, setGoodbyeMsgsEnabled] = useState(false);
   const router = useRouter();
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const error = useSelector((state: RootState) => state.error.message);
@@ -31,6 +32,7 @@ const Page = () => {
   // Main page
   return (
     <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+      {/* Welcome messages  */}
       <div className="flex items-center">
         <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
         <Switch
@@ -39,11 +41,24 @@ const Page = () => {
         />
       </div>
       <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
-      <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
+      <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
         <TextArea placeholder="Welcome message" className="mt-4 col-span-5" disabled={!welcomeMsgsEnabled} />
       </div>
+
+      {/* Goodbye messages  */}
+      <div className="flex items-center">
+        <h2 className="text-4xl text-gradient font-bold mr-3">Goodbye messages</h2>
+        <Switch
+          id="goodbyeMsgsCheckbox"
+          onCheckedChange={(checked: boolean) => setGoodbyeMsgsEnabled(checked)}
+        />
+      </div>
+      <p className="text-gradient-soft text-xl mb-2.5">Sent when a user leaves the server.</p>
+      <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
+        <TextArea placeholder="Goodbye message" className="mt-4 col-span-5" disabled={!goodbyeMsgsEnabled} />
+      </div>
       <Button
-        disabled={!welcomeMsgsEnabled}
+        disabled={!goodbyeMsgsEnabled}
         className="text-white bg-secondary/80 hover:bg-secondary/60 mt-5"
         rippleColor="#7C72FF"
         variant="default"
