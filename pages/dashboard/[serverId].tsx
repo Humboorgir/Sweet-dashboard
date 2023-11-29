@@ -1,7 +1,7 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
+import SaveChanges from "@/components/dashboard/saveChanges";
 import TextArea from "@/components/shared/textarea";
 import Switch from "@/components/shared/switch";
-import Button from "@/components/shared/button";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -32,6 +32,8 @@ const Page = () => {
   // Main page
   return (
     <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+      {/* fixed element, displayed conditionally  */}
+      <SaveChanges goodbyeMsgsEnabled={goodbyeMsgsEnabled} />
       {/* Welcome messages  */}
       <div className="flex items-center">
         <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
@@ -57,14 +59,6 @@ const Page = () => {
       <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
         <TextArea placeholder="Goodbye message" className="mt-4 col-span-5" disabled={!goodbyeMsgsEnabled} />
       </div>
-      <Button
-        disabled={!goodbyeMsgsEnabled}
-        className="text-white bg-secondary/80 hover:bg-secondary/60 mt-5"
-        rippleColor="#7C72FF"
-        variant="default"
-        size="lg">
-        Save changes
-      </Button>
     </div>
   );
 };
