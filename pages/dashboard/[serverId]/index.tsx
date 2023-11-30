@@ -50,9 +50,10 @@ const Page = () => {
             data: guild.verification_level,
             icon: <People />,
           },
-        ].map((info) => {
+        ].map((info, i) => {
           return (
             <div
+              key={i}
               className="border border-neutral-700 h-[100px] w-full min-w-[220px] mr-3 mb-3 duration-300
             rounded-3xl p-5 flex flex-col items-start justify-center translate-y-0 scale-100
             hover:translate-y-[-5px] hover:scale-[1.02] transition-all">
