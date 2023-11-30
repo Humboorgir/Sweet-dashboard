@@ -24,8 +24,14 @@ export const guildSettings = createSlice({
     toggleGoodbyeMsgs: (state, action: PayloadAction<boolean>) => {
       state.goodbyeMsgsEnabled = action.payload;
     },
+    resetSettings: (state) => {
+      state.welcomeMsgsEnabled = false;
+      state.welcomeMsg = "";
+      state.goodbyeMsgsEnabled = false;
+      state.goodbyeMsg = "";
+    },
   },
 });
 
-export const { toggleWelcomeMsgs, toggleGoodbyeMsgs } = guildSettings.actions;
+export const { toggleWelcomeMsgs, toggleGoodbyeMsgs, resetSettings } = guildSettings.actions;
 export default guildSettings.reducer;

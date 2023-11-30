@@ -1,7 +1,6 @@
 import { PartialGuild } from "@/types";
 
 import axios from "axios";
-import useGuilds from "@/hooks/useGuilds";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
