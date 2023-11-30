@@ -39,24 +39,21 @@ const GuildInfo = () => {
         <ArrowDown className="text-sm mr-1.5 mb-1" /> Settings
       </h3>
       <div className="min-w-[94%] ml-2">
-        <Button
-          variant="ghost"
-          className="flex items-center hover:bg-secondary/30 w-full justify-start
+        {[
+          { title: "Welcome & Goodbye", href: `/welcomer`, icon: <Hand /> },
+          { title: "Automod", href: "/automod", icon: <Robot /> },
+          { title: "Auto responder", href: "/autoresponder", icon: <Send /> },
+        ].map(({ title, icon, href }) => {
+          return (
+            <Button
+              variant="ghost"
+              href={`/dashboard/${serverId}/${href}`}
+              className="flex items-center hover:bg-secondary/30 w-full justify-start
         bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
-          <Hand className="text-sm mr-2 text-foreground/80" /> Welcome & Goodbye
-        </Button>
-        <Button
-          variant="ghost"
-          className="flex items-center hover:bg-secondary/30 w-full justify-start
-           bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
-          <Robot className="text-sm mr-2 text-foreground/80" /> Automod
-        </Button>
-        <Button
-          variant="ghost"
-          className="flex items-center hover:bg-secondary/30 w-full justify-start
-           bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
-          <Send className="text-sm mr-2 text-foreground/80" /> Auto responder
-        </Button>
+              <span className="text-base mr-2 text-foreground/80">{icon}</span> {title}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );
