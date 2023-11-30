@@ -1,6 +1,7 @@
 import Sidebar from "@/components/dashboard/sidebar";
 import GuildInfo from "@/components/dashboard/guildInfo";
 
+import useGuild from "@/hooks/useGuild";
 import useGuilds from "@/hooks/useGuilds";
 import useMutualGuilds from "@/hooks/useMutualGuilds";
 
@@ -11,8 +12,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const router = useRouter();
   const { serverId } = router.query;
   // load guild data into the global state
-  useGuilds();
-  useMutualGuilds();
+  if (typeof serverId == "string") {
+    useGuild(serverId);
+    useGuilds();
+    useMutualGuilds();
+  }
+
   return (
     <div className="relative min-h-screen bg-neutral-900 text-foreground">
       <Sidebar />
