@@ -31,7 +31,7 @@ const Guild: FC<Props> = ({ guild, isLoading }) => {
       <TooltipContent
         side="right"
         sideOffset={15}
-        className="rounded-md shadow-md bg-zinc-950 tooltip
+        className="rounded-md shadow-md bg-zinc-950 tooltip z-20
       duration-100 origin-left p-2">
         {guild.name}
       </TooltipContent>
