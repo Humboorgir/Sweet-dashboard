@@ -15,7 +15,7 @@ export default function useGuild(guildId: string) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!session?.accessToken) return;
-    if (cache) {
+    if (cache && cache.id == guildId) {
       console.log(cache);
       console.log("[GUILD] Using cache");
       dispatch(setGuild(cache));
