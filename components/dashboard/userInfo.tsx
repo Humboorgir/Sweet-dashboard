@@ -48,9 +48,10 @@ const UserInfo = () => {
           { title: "Welcome & Goodbye", icon: <Hand /> },
           { title: "Automod", icon: <Robot /> },
           { title: "Auto responder", icon: <Send /> },
-        ].map(({ title, icon }) => {
+        ].map(({ title, icon }, i) => {
           return (
             <Button
+              key={i}
               variant="ghost"
               rippleColor="transparent"
               className="flex items-center hover:bg-secondary/30 w-full justify-start cursor-not-allowed
