@@ -10,6 +10,8 @@ import { toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSett
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
+import Head from "next/head";
+
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -18,6 +20,7 @@ const Page = () => {
   const error = useSelector((state: RootState) => state.error.message);
   const welcomeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.welcomeMsgsEnabled);
   const goodbyeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.goodbyeMsgsEnabled);
+  const guild = useSelector((state: RootState) => state.guild);
 
   if (error) console.log(error);
 
@@ -32,37 +35,52 @@ const Page = () => {
       </div>
     );
 
-  // Main page
+  const title = `${guild.name} - Welcome & Goodbye`;
   return (
-    <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
-      {/* fixed element, displayed conditionally  */}
-      <SaveChanges />
-      {/* Welcome messages  */}
-      <div className="flex items-center">
-        <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
-        <Switch
-          id="welcomeMsgsCheckbox"
-          onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
-        />
-      </div>
-      <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
-      <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
-        <TextArea placeholder="Welcome message" className="mt-4 col-span-5" disabled={!welcomeMsgsEnabled} />
-      </div>
+    <>
+      {/* metadata   */}
+      <Head>
+        <title>{title}</title>
+      </Head>
 
-      {/* Goodbye messages  */}
-      <div className="flex items-center">
-        <h2 className="text-4xl text-gradient font-bold mr-3">Goodbye messages</h2>
-        <Switch
-          id="goodbyeMsgsCheckbox"
-          onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
-        />
+      <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+        {/* fixed element, displayed conditionally  */}
+        <SaveChanges />
+        {/* Welcome messages  */}
+        <div className="flex items-center">
+          <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
+          <Switch
+            id="welcomeMsgsCheckbox"
+            onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
+          />
+        </div>
+        <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
+        <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
+          <TextArea
+            placeholder="Welcome message"
+            className="mt-4 col-span-5"
+            disabled={!welcomeMsgsEnabled}
+          />
+        </div>
+
+        {/* Goodbye messages  */}
+        <div className="flex items-center">
+          <h2 className="text-4xl text-gradient font-bold mr-3">Goodbye messages</h2>
+          <Switch
+            id="goodbyeMsgsCheckbox"
+            onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
+          />
+        </div>
+        <p className="text-gradient-soft text-xl mb-2.5">Sent when a user leaves the server.</p>
+        <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
+          <TextArea
+            placeholder="Goodbye message"
+            className="mt-4 col-span-5"
+            disabled={!goodbyeMsgsEnabled}
+          />
+        </div>
       </div>
-      <p className="text-gradient-soft text-xl mb-2.5">Sent when a user leaves the server.</p>
-      <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
-        <TextArea placeholder="Goodbye message" className="mt-4 col-span-5" disabled={!goodbyeMsgsEnabled} />
-      </div>
-    </div>
+    </>
   );
 };
 
