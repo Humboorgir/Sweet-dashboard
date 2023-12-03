@@ -30,7 +30,7 @@ const UserInfo = () => {
   return (
     <div
       className="w-[280px] h-screen overflow-y-scroll border-2 border-neutral-800 rounded-3xl
-      my-5 py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/60 to-secondary/30">
+      py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/60 to-secondary/30">
       <Image
         className="rounded-full mb-3 mx-auto bg-neutral-800"
         src={iconUrl}

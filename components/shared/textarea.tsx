@@ -8,7 +8,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, InputProps>(
   ({ className, placeholder, disabled, maxLength = 140, ...props }, ref) => {
     console.log(disabled);
     return (
-      <div className={cn("relative min-h-[120px] min-w-[700px] max-w-[80vw]", className)}>
+      <div className={cn("relative min-h-[120px] w-[700px] max-w-[80vw]", className)}>
         <textarea
           className="absolute flex top-0 left-0 bottom-0 right-0 rounded-md bg-background px-3 py-3
         ring-offset-background focus-visible:outline-none border disabled:cursor-not-allowed 

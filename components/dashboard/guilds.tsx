@@ -3,13 +3,13 @@ import { RootState } from "@/redux/store";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { useSelector } from "react-redux";
 
-const Sidebar = () => {
+const Guilds = () => {
   const guilds = useSelector((state: RootState) => state.userGuilds.data);
   const loading = !guilds.length || guilds[0].id == "Loading";
   if (!guilds) return <div>Loading</div>;
 
   return (
-    <div className="no-scrollbar px-auto py-2 h-screen w-[80px] gap-3 overflow-y-auto pt-3">
+    <div className="no-scrollbar px-auto h-screen w-[80px] gap-3 overflow-y-auto">
       <TooltipProvider>
         {guilds.map((guild, i) => {
           return <Guild key={i} guild={guild} isLoading={loading} />;
@@ -19,4 +19,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Guilds;

@@ -43,18 +43,18 @@ const Page = () => {
         <title>{title}</title>
       </Head>
 
-      <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+      <div className="py-5 px-8 md:py-8 max-w-[calc(100vw-100px)]">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         {/* Welcome messages  */}
         <div className="flex items-center">
-          <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
+          <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Welcome messages</h2>
           <Switch
             id="welcomeMsgsCheckbox"
             onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
           />
         </div>
-        <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
+        <p className="text-gradient-soft text-lg mb-2.5">Sent when a new user joins the server.</p>
         <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
           <TextArea
             placeholder="Welcome message"
@@ -65,14 +65,14 @@ const Page = () => {
 
         {/* Goodbye messages  */}
         <div className="flex items-center">
-          <h2 className="text-4xl text-gradient font-bold mr-3">Goodbye messages</h2>
+          <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Goodbye messages</h2>
           <Switch
             id="goodbyeMsgsCheckbox"
             onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
           />
         </div>
-        <p className="text-gradient-soft text-xl mb-2.5">Sent when a user leaves the server.</p>
-        <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
+        <p className="text-gradient-soft text-lg mb-2.5">Sent when a user leaves the server.</p>
+        <div className="grid place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]">
           <TextArea
             placeholder="Goodbye message"
             className="mt-4 col-span-5"
