@@ -48,13 +48,13 @@ const Page = () => {
         <SaveChanges />
         {/* Welcome messages  */}
         <div className="flex items-center">
-          <h2 className="text-4xl text-gradient font-bold mr-3">Welcome messages</h2>
+          <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Welcome messages</h2>
           <Switch
             id="welcomeMsgsCheckbox"
             onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
           />
         </div>
-        <p className="text-gradient-soft text-xl mb-2.5">Sent when a new user joins the server.</p>
+        <p className="text-gradient-soft text-lg mb-2.5">Sent when a new user joins the server.</p>
         <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
           <TextArea
             placeholder="Welcome message"
@@ -65,13 +65,13 @@ const Page = () => {
 
         {/* Goodbye messages  */}
         <div className="flex items-center">
-          <h2 className="text-4xl text-gradient font-bold mr-3">Goodbye messages</h2>
+          <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Goodbye messages</h2>
           <Switch
             id="goodbyeMsgsCheckbox"
             onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
           />
         </div>
-        <p className="text-gradient-soft text-xl mb-2.5">Sent when a user leaves the server.</p>
+        <p className="text-gradient-soft text-lg mb-2.5">Sent when a user leaves the server.</p>
         <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
           <TextArea
             placeholder="Goodbye message"
