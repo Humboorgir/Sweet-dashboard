@@ -72,7 +72,7 @@ const Page = () => {
           />
         </div>
         <p className="text-gradient-soft text-lg mb-2.5">Sent when a user leaves the server.</p>
-        <div className="grid place-items-center grid-cols-[repeat(5,min-content)]">
+        <div className="grid place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]">
           <TextArea
             placeholder="Goodbye message"
             className="mt-4 col-span-5"
