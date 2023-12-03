@@ -43,7 +43,7 @@ const Page = () => {
         <title>{title}</title>
       </Head>
 
-      <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+      <div className="py-5 px-8 md:py-8 max-w-[calc(100vw-100px)]">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         {/* Welcome messages  */}

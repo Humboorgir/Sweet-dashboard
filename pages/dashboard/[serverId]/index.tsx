@@ -43,7 +43,7 @@ const Page = () => {
       </Head>
 
       {/* page content  */}
-      <div className="p-5 md:px-8 md:pt-12 max-w-[calc(100vw-100px)]">
+      <div className="py-5 px-8 md:py-8 max-w-[calc(100vw-100px)]">
         <h2 className="text-3xl text-gradient mb-5">Overview</h2>
         <div className="w-fit flex items-center justify-center flex-wrap">
           {[

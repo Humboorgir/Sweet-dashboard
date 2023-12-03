@@ -23,7 +23,7 @@ const GuildInfo = () => {
   return (
     <div
       className="w-[280px] border-2 border-neutral-800 rounded-3xl h-screen overflow-y-auto no-scrollbar
-      my-5 py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/60 to-secondary/30">
+      py-6 px-3 flex flex-col items-center bg-gradient-to-br from-[#4F4A98] to-[#2D2B4B]">
       <Image
         className="rounded-full mb-3 mx-auto bg-neutral-800"
         src={iconUrl}
