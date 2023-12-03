@@ -47,6 +47,7 @@ const GuildInfo = () => {
           return (
             <Button
               key={i}
+              rippleColor="#7C72FF"
               variant="ghost"
               href={`/dashboard/${serverId}/${href}`}
               className="flex items-center hover:bg-secondary/30 w-full justify-start
