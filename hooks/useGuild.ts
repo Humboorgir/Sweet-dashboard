@@ -46,5 +46,5 @@ export default function useGuild(guildId: string) {
           message: e.message,
         });
       });
-  }, [status]);
+  }, [status, guildId]);
 }
