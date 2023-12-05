@@ -24,6 +24,12 @@ export const guildSettings = createSlice({
     toggleGoodbyeMsgs: (state, action: PayloadAction<boolean>) => {
       state.goodbyeMsgsEnabled = action.payload;
     },
+    setWelcomeMsg: (state, action: PayloadAction<string>) => {
+      state.welcomeMsg = action.payload;
+    },
+    setGoodbyeMsg: (state, action: PayloadAction<string>) => {
+      state.goodbyeMsg = action.payload;
+    },
     resetSettings: (state) => {
       state.welcomeMsgsEnabled = false;
       state.welcomeMsg = "";
@@ -33,5 +39,6 @@ export const guildSettings = createSlice({
   },
 });
 
-export const { toggleWelcomeMsgs, toggleGoodbyeMsgs, resetSettings } = guildSettings.actions;
+export const { toggleWelcomeMsgs, toggleGoodbyeMsgs, setWelcomeMsg, setGoodbyeMsg, resetSettings } =
+  guildSettings.actions;
 export default guildSettings.reducer;

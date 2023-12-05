@@ -6,7 +6,12 @@ import Switch from "@/components/shared/switch";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSettings";
+import {
+  setWelcomeMsg,
+  setGoodbyeMsg,
+  toggleGoodbyeMsgs,
+  toggleWelcomeMsgs,
+} from "@/redux/features/guildSettings";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
@@ -19,7 +24,9 @@ const Page = () => {
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const error = useSelector((state: RootState) => state.error.message);
   const welcomeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.welcomeMsgsEnabled);
+  const welcomeMsg = useSelector((state: RootState) => state.guildSettings.welcomeMsg);
   const goodbyeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.goodbyeMsgsEnabled);
+  const goodbyeMsg = useSelector((state: RootState) => state.guildSettings.goodbyeMsg);
   const guild = useSelector((state: RootState) => state.guild);
 
   if (error) console.log(error);
@@ -51,6 +58,7 @@ const Page = () => {
           <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Welcome messages</h2>
           <Switch
             id="welcomeMsgsCheckbox"
+            checked={welcomeMsgsEnabled}
             onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
           />
         </div>
@@ -58,6 +66,8 @@ const Page = () => {
         <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
           <TextArea
             placeholder="Welcome message"
+            onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
+            value={welcomeMsg}
             className="mt-4 col-span-5 bg-neutral-900"
             disabled={!welcomeMsgsEnabled}
           />
@@ -68,6 +78,7 @@ const Page = () => {
           <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Goodbye messages</h2>
           <Switch
             id="goodbyeMsgsCheckbox"
+            checked={goodbyeMsgsEnabled}
             onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
           />
         </div>
@@ -75,6 +86,8 @@ const Page = () => {
         <div className="grid place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]">
           <TextArea
             placeholder="Goodbye message"
+            onChange={(e) => dispatch(setGoodbyeMsg(e.target.value))}
+            value={goodbyeMsg}
             className="mt-4 col-span-5 !bg-neutral-900"
             disabled={!goodbyeMsgsEnabled}
           />

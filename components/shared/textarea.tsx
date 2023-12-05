@@ -6,7 +6,6 @@ export type InputProps = React.InputHTMLAttributes<HTMLTextAreaElement>;
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, InputProps>(
   ({ className, placeholder, disabled, maxLength = 140, ...props }, ref) => {
-    console.log(disabled);
     return (
       <div className={cn("relative min-h-[120px] w-[700px] max-w-[80vw]", className)}>
         <textarea

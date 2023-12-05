@@ -1,9 +1,14 @@
 import * as Switch from "@radix-ui/react-switch";
+import type { SwitchProps } from "@radix-ui/react-switch";
 // using radix ui's switch component for now cause
 //  i dont have the time to make one myself
-const SwitchComponent = ({ ...props }) => {
+
+type Props = SwitchProps;
+
+const SwitchComponent = ({ checked, ...props }: Props) => {
   return (
     <Switch.Root
+      checked={checked}
       className="w-[64px] h-6 flex items-center bg-white/60 rounded-full relative group
   data-[state='checked']:bg-secondary/50 transition-colors duration-100"
       {...props}>
