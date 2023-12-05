@@ -58,7 +58,7 @@ const Page = () => {
         <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
           <TextArea
             placeholder="Welcome message"
-            className="mt-4 col-span-5"
+            className="mt-4 col-span-5 bg-neutral-900"
             disabled={!welcomeMsgsEnabled}
           />
         </div>
@@ -75,7 +75,7 @@ const Page = () => {
         <div className="grid place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]">
           <TextArea
             placeholder="Goodbye message"
-            className="mt-4 col-span-5"
+            className="mt-4 col-span-5 !bg-neutral-900"
             disabled={!goodbyeMsgsEnabled}
           />
         </div>
