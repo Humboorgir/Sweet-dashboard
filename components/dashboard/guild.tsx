@@ -17,17 +17,22 @@ const Guild: FC<Props> = ({ guild, isLoading }) => {
         <Link
           href={`/dashboard/${guild.id}`}
           className={cn(
-            `relative h-[57px] w-[57px] my-2.5 mx-auto flex items-center
-      justify-center hover:bg-primary bg-gray-800 hover:rounded-xl 
-      rounded-3xl transition-all duration-200 ease-in-out cursor-pointer group`,
+            `relative h-[57px] w-[57px] my-2.5 mx-auto grid place-items-center
+             hover:bg-primary bg-gray-800 hover:rounded-xl text-2xl font-bold
+             rounded-3xl transition-all duration-200 ease-in-out cursor-pointer group
+            text-foreground-soft`,
             isLoading && "animate-pulse"
           )}
           style={{
             backgroundImage: `url(${iconUrl})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-          }}></Link>
+          }}>
+          {/* display first 2 letters of guild name if no guild icon is present */}
+          {!guild.icon && guild.name.slice(0, 2)}
+        </Link>
       </TooltipTrigger>
+
       <TooltipContent
         side="right"
         sideOffset={15}
