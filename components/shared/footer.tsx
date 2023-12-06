@@ -43,10 +43,10 @@ const Footer = ({ className, ...props }: Props) => {
 
         <div className="flex flex-col">
           <h3 className="font-bold text-foreground uppercase px-3">Links</h3>
-          {links.slice(0, 3).map((link, i) => {
+          {links.slice(0, 3).map((link) => {
             return (
               <Button
-                key={i}
+                key={link.url}
                 variant="ghost"
                 className="text-foreground-soft h-auto flex justify-start py-0.5 uppercase"
                 href={link.url}>
@@ -60,6 +60,7 @@ const Footer = ({ className, ...props }: Props) => {
           {links.slice(3, 6).map((link) => {
             return (
               <Button
+                key={link.url}
                 variant="ghost"
                 className="text-foreground-soft h-auto flex justify-start w-auto py-0.5 uppercase"
                 href={link.url}>
@@ -73,6 +74,7 @@ const Footer = ({ className, ...props }: Props) => {
           {links.slice(6, 9).map((link) => {
             return (
               <Button
+                key={link.url}
                 variant="ghost"
                 className="text-foreground-soft h-auto flex justify-start w-auto py-0.5 uppercase"
                 href={link.url}>
@@ -85,9 +87,13 @@ const Footer = ({ className, ...props }: Props) => {
       {/* copyright notice and social media  */}
       <div className="text-foreground-soft text-center w-fit">
         <div className="flex justify-center items-center space-x-6 text-3xl mb-4">
-          {[Github, Discord, Youtube, Instagram].map((El) => {
+          {[Github, Discord, Youtube, Instagram].map((El, i) => {
             return (
-              <El className="rounded-full border border-neutral-600 h-12 w-12 p-2 hover:bg-neutral-800 transition-colors cursor-pointer" />
+              <El
+                key={i}
+                className="rounded-full border border-neutral-600 h-12 w-12
+                 p-2 hover:bg-neutral-800 transition-colors cursor-pointer"
+              />
             );
           })}
         </div>
