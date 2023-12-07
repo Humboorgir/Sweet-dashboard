@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { ClassValue } from "clsx";
 
 type Props = React.ButtonHTMLAttributes<HTMLDivElement> & {
-  className: ClassValue;
+  className?: ClassValue;
 };
 
 const Container = ({ children, className, ...props }: Props) => {
