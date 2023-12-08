@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ClassValue } from "clsx";
 
-type Props = React.ButtonHTMLAttributes<HTMLDivElement> & {
+type Props = React.HTMLProps<HTMLDivElement> & {
   className?: ClassValue;
 };
 

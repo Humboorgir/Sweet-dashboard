@@ -1,13 +1,14 @@
 import type { RootState } from "@/redux/store";
 
+import Option from "@/components/dashboard/option";
+
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
 import Image from "next/image";
-import Button from "@/components/shared/button";
 
 import { FaAngleDown as ArrowDown } from "react-icons/fa";
-import { FaHandPaper as Hand } from "react-icons/fa";
+import { FaHandPaper as Hand, FaSearch as Magnifier } from "react-icons/fa";
 import { IoIosSend as Send } from "react-icons/io";
 import { FaRobot as Robot } from "react-icons/fa6";
 
@@ -16,14 +17,22 @@ const GuildInfo = () => {
   const userGuilds = useSelector((state: RootState) => state.userGuilds.data);
 
   const { serverId } = router.query;
-
   const guild = userGuilds.filter((guild) => guild.id == serverId)[0];
   if (!serverId || !guild) return null;
+
+  // page content
   const iconUrl = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`;
+  const settingsOptions = [
+    { title: "Overview", href: `overview`, icon: <Magnifier /> },
+    { title: "Welcomer", href: `welcomer`, icon: <Hand /> },
+    { title: "Automod", href: "automod", icon: <Robot /> },
+    { title: "Auto responder", href: "autoresponder", icon: <Send /> },
+  ];
   return (
     <div
       className="w-[280px] border-2 border-neutral-800 rounded-3xl h-screen overflow-y-auto no-scrollbar
       py-6 px-3 flex flex-col items-center bg-gradient-to-br from-[#4F4A98] to-[#2D2B4B]">
+      {/* guild name and icon  */}
       <Image
         className="rounded-full mb-3 mx-auto bg-neutral-800"
         src={iconUrl}
@@ -33,28 +42,18 @@ const GuildInfo = () => {
         alt={guild.name}
       />
       <h3 className="text-lg font-bold mb-8">{guild.name}</h3>
-      {/* TODO: make a seperate Category component for this */}
+
+      {/* categories and options  */}
+
       {/* category title  */}
-      <h3 className="text-sm tracking-wider text-foreground/70 flex items-center mb-1 mr-auto font-normal">
+      <h3
+        className="text-sm tracking-wider text-foreground/80 cursor-pointer
+      flex items-center mb-1 mr-auto font-normal">
         <ArrowDown className="text-sm mr-1.5 mb-1" /> Settings
       </h3>
       <div className="min-w-[94%] ml-2">
-        {[
-          { title: "Welcome & Goodbye", href: `welcomer`, icon: <Hand /> },
-          { title: "Automod", href: "automod", icon: <Robot /> },
-          { title: "Auto responder", href: "autoresponder", icon: <Send /> },
-        ].map(({ title, icon, href }, i) => {
-          return (
-            <Button
-              key={i}
-              rippleColor="#7C72FF"
-              variant="ghost"
-              href={`/dashboard/${serverId}/${href}`}
-              className="flex items-center hover:bg-secondary/30 w-full justify-start
-        bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
-              <span className="text-base mr-2 text-foreground/80">{icon}</span> {title}
-            </Button>
-          );
+        {settingsOptions.map(({ title, icon, href }, i) => {
+          return <Option serverId={serverId as string} href={href} icon={icon} title={title} key={i} />;
         })}
       </div>
     </div>
