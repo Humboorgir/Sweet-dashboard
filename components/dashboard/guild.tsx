@@ -15,7 +15,7 @@ const Guild: FC<Props> = ({ guild, isLoading }) => {
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <Link
-          href={`/dashboard/${guild.id}`}
+          href={`/dashboard/${guild.id}/overview`}
           className={cn(
             `relative h-[57px] w-[57px] my-2.5 mx-auto grid place-items-center
              hover:bg-primary bg-gray-800 hover:rounded-xl text-2xl font-bold
