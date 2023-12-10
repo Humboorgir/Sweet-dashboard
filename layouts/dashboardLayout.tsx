@@ -37,11 +37,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* sidebar (hidden by default on small screens) */}
       <div
         className={cn(
-          `fixed z-10 w-[440px] top-[52px] -translate-x-full md:translate-x-0 bg-background
+          `fixed z-10 w-fit top-[52px] -translate-x-full md:translate-x-0 bg-background
            md:bg-transparent duration-200 transition-transform`,
           sidebarOpen && "translate-x-0"
         )}>
-        <div className="relative w-[440px] min-h-screen flex">
+        <div className="relative w-fit min-h-screen flex">
           <Guilds />
           {/* displayed while viewing server dashboards */}
           <GuildInfo />
