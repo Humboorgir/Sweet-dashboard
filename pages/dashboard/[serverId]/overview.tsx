@@ -1,8 +1,4 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
-import SaveChanges from "@/components/dashboard/saveChanges";
-import TextArea from "@/components/shared/textarea";
-import Switch from "@/components/shared/switch";
-
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -17,7 +13,6 @@ import Head from "next/head";
 const Page = () => {
   const guild = useSelector((state: RootState) => state.guild);
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const error = useSelector((state: RootState) => state.error.message);
