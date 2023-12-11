@@ -25,11 +25,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useMutualGuilds();
 
   return (
-    <div className="relative h-screen bg-background text-foreground overflow-y-auto">
+    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
       <div
         className={cn(
-          "absolute -ml-4 pl-4 left-0 md:left-[360px] top-[52px] right-0 bottom-0 bg-neutral-900"
+          "absolute left-0 md:left-[360px] top-[52px] min-h-[calc(100vh-52px)] right-0 bg-neutral-900 "
         )}>
         {children}
       </div>
