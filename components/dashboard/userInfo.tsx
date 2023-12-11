@@ -29,7 +29,7 @@ const UserInfo = () => {
   const iconUrl = session?.user.image ? session?.user.image : "";
   return (
     <div
-      className="w-[280px] h-screen overflow-y-scroll border-2 border-neutral-800 rounded-3xl
+      className="w-[280px] h-screen overflow-y-scroll rounded-3xl
       py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/60 to-secondary/30">
       <Image
         className="rounded-full mb-3 mx-auto bg-neutral-800"
