@@ -6,8 +6,6 @@ const reqString = {
 };
 const guildSchema = new mongoose.Schema({
   id: reqString,
-  name: reqString,
-  iconUrl: reqString,
   settings: {
     welcome: {
       channelId: reqString,
