@@ -5,6 +5,7 @@ import Switch from "@/components/shared/switch";
 
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import { cn } from "@/lib/utils";
 import { RootState } from "@/redux/store";
 import {
   setWelcomeMsg,
@@ -62,14 +63,19 @@ const Page = () => {
             onCheckedChange={(checked: boolean) => dispatch(toggleWelcomeMsgs(checked))}
           />
         </div>
-        <p className="text-gradient-soft text-lg mb-2.5">Sent when a new user joins the server.</p>
-        <div className="grid place-items-center mb-10 grid-cols-[repeat(5,min-content)]">
+        <p className={cn("text-gradient-soft text-lg mb-8", welcomeMsgsEnabled && "mb-1")}>
+          Sent when a new user joins the server.
+        </p>
+        <div
+          className={cn(
+            "hidden place-items-center mb-10 grid-cols-[repeat(5,min-content)]",
+            welcomeMsgsEnabled && "grid"
+          )}>
           <TextArea
             placeholder="Welcome message"
             onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
             value={welcomeMsg}
             className="mt-4 col-span-5 bg-neutral-900"
-            disabled={!welcomeMsgsEnabled}
           />
         </div>
 
@@ -82,14 +88,17 @@ const Page = () => {
             onCheckedChange={(checked: boolean) => dispatch(toggleGoodbyeMsgs(checked))}
           />
         </div>
-        <p className="text-gradient-soft text-lg mb-2.5">Sent when a user leaves the server.</p>
-        <div className="grid place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]">
+        <p className="text-gradient-soft text-lg mb-1">Sent when a user leaves the server.</p>
+        <div
+          className={cn(
+            "hidden place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]",
+            goodbyeMsgsEnabled && "grid"
+          )}>
           <TextArea
             placeholder="Goodbye message"
             onChange={(e) => dispatch(setGoodbyeMsg(e.target.value))}
             value={goodbyeMsg}
             className="mt-4 col-span-5 !bg-neutral-900"
-            disabled={!goodbyeMsgsEnabled}
           />
         </div>
       </div>

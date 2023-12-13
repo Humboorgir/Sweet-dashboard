@@ -52,10 +52,6 @@
   animation: scaleOut 100ms ease-in-out !important;
 }
 
-#nprogress {
-  opacity: 0.5;
-}
-
 @keyframes scaleIn {
   from {
     opacity: 0;
