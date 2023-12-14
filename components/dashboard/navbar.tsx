@@ -6,7 +6,7 @@ import { IoMdSettings as Settings } from "react-icons/io";
 const Navbar = () => {
   return (
     <div
-      className="fixed bg-background left-0 top-0 w-screen h-[52px] z-20
+      className="sticky bg-background h-[52px] z-20
   flex items-center justify-between px-8 text-foreground-soft">
       <OpenSidebarButton />
 

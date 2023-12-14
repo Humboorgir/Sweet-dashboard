@@ -7,7 +7,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLTextAreaElement>;
 const TextArea = React.forwardRef<HTMLTextAreaElement, InputProps>(
   ({ className, placeholder, disabled, maxLength = 140, ...props }, ref) => {
     return (
-      <div className={cn("relative min-h-[120px] w-[700px] max-w-[80vw]", className)}>
+      <div className={cn("relative min-h-[120px] max-w-[670px] w-full", className)}>
         <textarea
           className="absolute flex top-0 left-0 bottom-0 right-0 rounded-md bg-neutral-900 px-3 py-3
         ring-offset-neutral-900 focus-visible:outline-none border disabled:cursor-not-allowed 
