@@ -31,7 +31,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* sidebar (hidden by default on small screens) */}
         <div
           className={cn(
-            `fixed md:sticky z-20 w-fit -translate-x-full md:translate-x-0 bg-background
+            `fixed md:sticky z-50 md:z-20 w-fit -translate-x-full md:translate-x-0 bg-background
            md:bg-transparent duration-200 transition-transform`,
             sidebarOpen && "translate-x-0"
           )}>
