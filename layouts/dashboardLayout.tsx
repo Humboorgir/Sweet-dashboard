@@ -25,31 +25,28 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useMutualGuilds();
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
-      <div
-        className={cn(
-          "absolute left-0 md:left-[360px] top-[52px] min-h-[calc(100vh-52px)] right-0 bg-neutral-900 "
-        )}>
-        {children}
-      </div>
-
-      {/* sidebar (hidden by default on small screens) */}
-      <div
-        className={cn(
-          `fixed z-10 w-fit top-[52px] -translate-x-full md:translate-x-0 bg-background
+      <div className="flex min-w-screen">
+        {/* sidebar (hidden by default on small screens) */}
+        <div
+          className={cn(
+            `fixed md:sticky z-20 w-fit -translate-x-full md:translate-x-0 bg-background
            md:bg-transparent duration-200 transition-transform`,
-          sidebarOpen && "translate-x-0"
-        )}>
-        <div className="relative w-fit min-h-screen flex">
-          <Guilds />
-          {/* displayed while viewing server dashboards */}
-          <GuildInfo />
-          {/* displayed in the home page  */}
-          <UserInfo />
+            sidebarOpen && "translate-x-0"
+          )}>
+          <div className="relative w-fit min-h-screen flex">
+            <Guilds />
+            {/* displayed while viewing server dashboards */}
+            <GuildInfo />
+            {/* displayed in the home page  */}
+            <UserInfo />
+          </div>
         </div>
+        {/* sidebar end  */}
+
+        <div className={cn("min-h-[calc(100vh-52px)] bg-neutral-900 grow")}>{children}</div>
       </div>
-      {/* sidebar end  */}
     </div>
   );
 }

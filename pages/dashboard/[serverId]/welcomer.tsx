@@ -51,7 +51,7 @@ const Page = () => {
         <title>{title}</title>
       </Head>
 
-      <div className="py-5 px-8 md:py-8 max-w-[calc(100vw-100px)]">
+      <div className="py-5 px-8 md:py-8 max-w-[100%]">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         {/* Welcome messages  */}
@@ -66,11 +66,7 @@ const Page = () => {
         <p className={cn("text-gradient-soft text-lg mb-8", welcomeMsgsEnabled && "mb-1")}>
           Sent when a new user joins the server.
         </p>
-        <div
-          className={cn(
-            "hidden place-items-center mb-10 grid-cols-[repeat(5,min-content)]",
-            welcomeMsgsEnabled && "grid"
-          )}>
+        <div className={cn("hidden mb-10", welcomeMsgsEnabled && "flex")}>
           <TextArea
             placeholder="Welcome message"
             onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
@@ -89,11 +85,7 @@ const Page = () => {
           />
         </div>
         <p className="text-gradient-soft text-lg mb-1">Sent when a user leaves the server.</p>
-        <div
-          className={cn(
-            "hidden place-items-center grid-cols-[repeat(5,min-content)] max-w-[70vw]",
-            goodbyeMsgsEnabled && "grid"
-          )}>
+        <div className={cn("hidden", goodbyeMsgsEnabled && "flex")}>
           <TextArea
             placeholder="Goodbye message"
             onChange={(e) => dispatch(setGoodbyeMsg(e.target.value))}
