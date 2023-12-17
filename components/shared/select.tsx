@@ -42,11 +42,13 @@ const Select = ({ children, options, onChange = () => {} }: Props) => {
         {selected.value ? selected.title : children}
       </Button>
       {/* select options  */}
+
       <div
         className={cn(
-          `absolute invisible top-full left-[50%] translate-x-[-50%] w-full min-w-[200px] bg-neutral-900 z-30 scale-[.8]
-           opacity-0 transition-all duration-150 origin-top max-h-[300px] overflow-y-scroll delay-100 rounded-b-md`,
-          open && "scale-100 opacity-100 visible"
+          `absolute invisible top-full left-[50%] translate-x-[-50%] w-full min-w-[200px] bg-neutral-900 z-10 scale-[.7]
+           opacity-0 transition-all duration-150 origin-top max-h-[0] overflow-y-scroll delay-100 rounded-b-md
+           border-b border-b-secondary`,
+          open && "scale-100 opacity-100 visible max-h-[200px]"
         )}>
         {options &&
           options.map((option, i) => (
