@@ -16,10 +16,13 @@ const config: Config = {
       },
       animation: {
         ripple: "ripple 600ms linear",
-        scaleIn: "scaleIn 100ms ease-out",
+        fadeIn: "fadeIn 150ms",
       },
-
       keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0%", transform: "scale(.8)" },
+          "100%": { opacity: "100%", transform: "scale(1)" },
+        },
         ripple: {
           "0%": { opacity: "40%", transform: "scale(0)" },
           "100%": { opacity: "0%", transform: "scale(3)" },
