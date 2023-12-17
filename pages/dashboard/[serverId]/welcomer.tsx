@@ -1,5 +1,6 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
 import SaveChanges from "@/components/dashboard/saveChanges";
+import SelectChannel from "@/components/dashboard/welcomer/selectChannel";
 import TextArea from "@/components/shared/textarea";
 import Switch from "@/components/shared/switch";
 
@@ -17,6 +18,7 @@ import {
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
 import Head from "next/head";
+import useGuildChannels from "@/hooks/useGuildChannels";
 
 const Page = () => {
   const router = useRouter();
@@ -34,6 +36,9 @@ const Page = () => {
 
   const { serverId } = router.query;
 
+  // fetch and load guild channels into the global state
+  useGuildChannels(serverId ? String(serverId) : "");
+
   const isGuildInMutualGuilds = mutualGuilds.some((guild) => guild.id == serverId);
 
   if (!isGuildInMutualGuilds)
@@ -44,6 +49,13 @@ const Page = () => {
     );
 
   const title = `${guild.name} - Welcome & Goodbye`;
+
+  const variables = [
+    { variable: "%user%", description: "Mentions the new member" },
+    { variable: "%username%", description: "New member's username" },
+    { variable: "%server%", description: "Server name" },
+    { variable: "%membercount%", description: "Server membercount" },
+  ];
   return (
     <>
       {/* metadata   */}
@@ -66,13 +78,37 @@ const Page = () => {
         <p className={cn("text-gradient-soft text-lg mb-8", welcomeMsgsEnabled && "mb-1")}>
           Sent when a new user joins the server.
         </p>
-        <div className={cn("hidden mb-10", welcomeMsgsEnabled && "flex")}>
+
+        <div className=""></div>
+
+        {/* text input  */}
+        <div className={cn("hidden mb-4", welcomeMsgsEnabled && "flex")}>
           <TextArea
             placeholder="Welcome message"
             onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
             value={welcomeMsg}
             className="mt-4 col-span-5 bg-neutral-900"
           />
+        </div>
+
+        {/* SelectChannel and variables container  */}
+        <div className="flex justify-between px-2 mb-10 flex-wrap max-w-[670px] w-full">
+          {/* variables  */}
+          <div className="mb-3 md:mb-0">
+            <h3 className="text-gradient">Variables: </h3>
+            {variables.map(({ variable, description }) => {
+              return (
+                <p className="text-gradient-soft">
+                  <span className="text-secondary">{variable}</span> {description}
+                </p>
+              );
+            })}
+          </div>
+          {/* option to select channel  */}
+          <div className={cn("hidden", welcomeMsgsEnabled && "block")}>
+            <h3 className="text-gradient mb-0.5">Send to: </h3>
+            <SelectChannel />
+          </div>
         </div>
 
         {/* Goodbye messages  */}
