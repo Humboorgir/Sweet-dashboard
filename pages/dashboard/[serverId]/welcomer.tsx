@@ -92,7 +92,7 @@ const Page = () => {
         </div>
 
         {/* SelectChannel and variables container  */}
-        <div className="flex justify-between px-2 mb-10 flex-wrap max-w-[670px] w-full">
+        <div className={cn("hidden justify-between px-2 mb-10 flex-wrap max-w-[670px] w-full", welcomeMsgsEnabled && "flex")}>
           {/* variables  */}
           <div className="mb-3 md:mb-0">
             <h3 className="text-gradient">Variables: </h3>
@@ -105,7 +105,7 @@ const Page = () => {
             })}
           </div>
           {/* option to select channel  */}
-          <div className={cn("hidden", welcomeMsgsEnabled && "block")}>
+          <div>
             <h3 className="text-gradient mb-0.5">Send to: </h3>
             <SelectChannel />
           </div>
