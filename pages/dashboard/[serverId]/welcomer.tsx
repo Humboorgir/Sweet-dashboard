@@ -1,6 +1,6 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
 import SaveChanges from "@/components/dashboard/saveChanges";
-import SelectChannel from "@/components/dashboard/welcomer/selectChannel";
+import WelcomeMessagesInputs from "@/components/dashboard/welcomer/welcomeMessagesInputs";
 import TextArea from "@/components/shared/textarea";
 import Switch from "@/components/shared/switch";
 
@@ -8,12 +8,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
 import { RootState } from "@/redux/store";
-import {
-  setWelcomeMsg,
-  setGoodbyeMsg,
-  toggleGoodbyeMsgs,
-  toggleWelcomeMsgs,
-} from "@/redux/features/guildSettings";
+import { setGoodbyeMsg, toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSettings";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
@@ -27,7 +22,6 @@ const Page = () => {
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const error = useSelector((state: RootState) => state.error.message);
   const welcomeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.welcomeMsgsEnabled);
-  const welcomeMsg = useSelector((state: RootState) => state.guildSettings.welcomeMsg);
   const goodbyeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.goodbyeMsgsEnabled);
   const goodbyeMsg = useSelector((state: RootState) => state.guildSettings.goodbyeMsg);
   const guild = useSelector((state: RootState) => state.guild);
@@ -50,12 +44,6 @@ const Page = () => {
 
   const title = `${guild.name} - Welcome & Goodbye`;
 
-  const variables = [
-    { variable: "%user%", description: "Mentions the new member" },
-    { variable: "%username%", description: "New member's username" },
-    { variable: "%server%", description: "Server name" },
-    { variable: "%membercount%", description: "Server membercount" },
-  ];
   return (
     <>
       {/* metadata   */}
@@ -66,7 +54,7 @@ const Page = () => {
       <div className="py-5 px-8 md:py-8 max-w-[100%]">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
-        {/* Welcome messages  */}
+        {/* Welcome messages ~ text & switch */}
         <div className="flex items-center">
           <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Welcome messages</h2>
           <Switch
@@ -79,37 +67,8 @@ const Page = () => {
           Sent when a new user joins the server.
         </p>
 
-        <div className=""></div>
-
-        {/* text input  */}
-        <div className={cn("hidden mb-4", welcomeMsgsEnabled && "flex")}>
-          <TextArea
-            placeholder="Welcome message"
-            onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
-            value={welcomeMsg}
-            className="mt-4 col-span-5 bg-neutral-900"
-          />
-        </div>
-
-        {/* SelectChannel and variables container  */}
-        <div className={cn("hidden justify-between px-2 mb-10 flex-wrap max-w-[670px] w-full", welcomeMsgsEnabled && "flex")}>
-          {/* variables  */}
-          <div className="mb-3 md:mb-0">
-            <h3 className="text-gradient">Variables: </h3>
-            {variables.map(({ variable, description }) => {
-              return (
-                <p className="text-gradient-soft">
-                  <span className="text-secondary">{variable}</span> {description}
-                </p>
-              );
-            })}
-          </div>
-          {/* option to select channel  */}
-          <div>
-            <h3 className="text-gradient mb-0.5">Send to: </h3>
-            <SelectChannel />
-          </div>
-        </div>
+        {/* Welcome message and channel input */}
+        {welcomeMsgsEnabled && <WelcomeMessagesInputs />}
 
         {/* Goodbye messages  */}
         <div className="flex items-center">
