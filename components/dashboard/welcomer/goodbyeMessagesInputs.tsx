@@ -1,31 +1,30 @@
 import TextArea from "@/components/shared/textarea";
-import SelectWelcomeChannel from "@/components/dashboard/welcomer/selectWelcomeChannel";
 import Variables from "@/components/dashboard/welcomer/variables";
+import SelectGoodbyeChannel from "@/components/dashboard/welcomer/selectGoodbyeChannel";
 
 import type { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { setWelcomeMsg } from "@/redux/features/guildSettings";
+import { setGoodbyeMsg } from "@/redux/features/guildSettings";
 
-const WelcomeMessagesInputs = () => {
+const GoodbyeMessagesInputs = () => {
   const dispatch = useDispatch();
-  const welcomeMsg = useSelector((state: RootState) => state.guildSettings.welcomeMsg);
+  const goodbyeMsg = useSelector((state: RootState) => state.guildSettings.goodbyeMsg);
+
   return (
     <div>
-      {/* text input  */}
       <TextArea
-        placeholder="Welcome message"
-        onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
-        value={welcomeMsg}
-        className="mb-4 mt-4 bg-neutral-900"
+        placeholder="Goodbye message"
+        onChange={(e) => dispatch(setGoodbyeMsg(e.target.value))}
+        value={goodbyeMsg}
+        className="mb-4 mt-4 !bg-neutral-900"
       />
-
       {/* SelectChannel and Variables container  */}
       <div className="flex justify-between px-2 mb-10 flex-wrap max-w-[670px] w-full">
         <Variables />
         {/* Welcome channel selection  */}
         <div>
           <h3 className="text-gradient mb-0.5">Send to: </h3>
-          <SelectWelcomeChannel />
+          <SelectGoodbyeChannel />
         </div>
       </div>
       {/* container end  */}
@@ -33,4 +32,4 @@ const WelcomeMessagesInputs = () => {
   );
 };
 
-export default WelcomeMessagesInputs;
+export default GoodbyeMessagesInputs;

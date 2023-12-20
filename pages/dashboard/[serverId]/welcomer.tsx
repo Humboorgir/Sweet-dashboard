@@ -1,14 +1,14 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
 import SaveChanges from "@/components/dashboard/saveChanges";
 import WelcomeMessagesInputs from "@/components/dashboard/welcomer/welcomeMessagesInputs";
-import TextArea from "@/components/shared/textarea";
+import GoodbyeMessagesInputs from "@/components/dashboard/welcomer/goodbyeMessagesInputs";
 import Switch from "@/components/shared/switch";
 
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
 import { RootState } from "@/redux/store";
-import { setGoodbyeMsg, toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSettings";
+import { toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSettings";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
@@ -51,7 +51,8 @@ const Page = () => {
         <title>{title}</title>
       </Head>
 
-      <div className="py-5 px-8 md:py-8 max-w-[100%]">
+      {/* page content */}
+      <div className="pt-5 pb-28 px-8 md:pt-8 max-w-[100%]">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         {/* Welcome messages ~ text & switch */}
@@ -70,7 +71,7 @@ const Page = () => {
         {/* Welcome message and channel input */}
         {welcomeMsgsEnabled && <WelcomeMessagesInputs />}
 
-        {/* Goodbye messages  */}
+        {/* Goodbye messages ~ text & switch */}
         <div className="flex items-center">
           <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">Goodbye messages</h2>
           <Switch
@@ -80,14 +81,8 @@ const Page = () => {
           />
         </div>
         <p className="text-gradient-soft text-lg mb-1">Sent when a user leaves the server.</p>
-        <div className={cn("hidden", goodbyeMsgsEnabled && "flex")}>
-          <TextArea
-            placeholder="Goodbye message"
-            onChange={(e) => dispatch(setGoodbyeMsg(e.target.value))}
-            value={goodbyeMsg}
-            className="mt-4 col-span-5 !bg-neutral-900"
-          />
-        </div>
+        {/* Goodbye message and channel input  */}
+        {goodbyeMsgsEnabled && <GoodbyeMessagesInputs />}
       </div>
     </>
   );
