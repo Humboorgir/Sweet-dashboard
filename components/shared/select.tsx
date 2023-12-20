@@ -45,16 +45,16 @@ const Select = ({ children, options, onChange = () => {} }: Props) => {
 
       <div
         className={cn(
-          `absolute invisible top-full left-[50%] translate-x-[-50%] w-full min-w-[200px] bg-neutral-900 z-10 scale-[.7]
-           opacity-0 transition-all duration-150 origin-top max-h-[0] overflow-y-scroll delay-100 rounded-b-md
+          `absolute invisible top-full left-[50%] translate-x-[-50%] w-full min-w-[200px] bg-neutral-900 z-20 scale-[.8]
+           opacity-0 transition-all duration-100 origin-top max-h-[200px] overflow-y-scroll delay-100 rounded-b-md
            border-b border-b-secondary`,
-          open && "scale-100 opacity-100 visible max-h-[200px]"
+          open && "scale-100 opacity-100 visible"
         )}>
         {options &&
           options.map((option, i) => (
             <Button
               key={i}
-              className="w-full text-secondary border-secondary border-t-0 first-of-type:border-t rounded-none
+              className="w-full justify-start text-secondary border-secondary border-t-0 first-of-type:border-t rounded-none
             last-of-type:rounded-b-md"
               rippleColor="#7C72FF"
               variant="outline"
