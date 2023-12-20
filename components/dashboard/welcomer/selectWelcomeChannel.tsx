@@ -4,7 +4,7 @@ import { setWelcomeChannel } from "@/redux/features/guildSettings";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
-const SelectChannel = () => {
+const SelectWelcomeChannel = () => {
   const dispatch = useDispatch();
   const guildChannels = useSelector((state: RootState) => state.guildChannels.data);
 
@@ -26,4 +26,4 @@ const SelectChannel = () => {
   );
 };
 
-export default SelectChannel;
+export default SelectWelcomeChannel;
