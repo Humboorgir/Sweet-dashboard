@@ -10,7 +10,7 @@ const SelectChannel = () => {
 
   const option = guildChannels.map((channel) => {
     return {
-      title: channel.name,
+      title: "#" + channel.name,
       value: channel.id,
     };
   });
