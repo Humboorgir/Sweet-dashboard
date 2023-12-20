@@ -5,14 +5,25 @@ import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSettings } from "@/redux/features/guildSettings";
 
+import axios from "axios";
+
 const SaveChangesButton = () => {
   let modified;
-  const state = useSelector((state: RootState) => state.guildSettings);
-  if (state.welcomeMsgsEnabled == true || state.goodbyeMsgsEnabled == true) modified = true;
+  const guildSettings = useSelector((state: RootState) => state.guildSettings);
+  const guild = useSelector((state: RootState) => state.guild);
+  if (guildSettings.welcomeMsgsEnabled == true || guildSettings.goodbyeMsgsEnabled == true) modified = true;
 
   const dispatch = useDispatch();
   function resetGuildSettings() {
     dispatch(resetSettings());
+  }
+  function updateGuildSettings() {
+    // for debugging purposes
+    if (!guild.id) return console.log(`[UpdateGuildSettings] No guild.id was found`);
+    axios
+      .put(`/api/guild/${guild.id}`, guildSettings)
+      .then((res) => res.data)
+      .then((res) => console.log(res));
   }
 
   return (
@@ -34,6 +45,7 @@ const SaveChangesButton = () => {
           Reset
         </Button>
         <Button
+          onClick={updateGuildSettings}
           className="text-white bg-secondary/80 hover:bg-secondary/60 md:text-lg"
           rippleColor="#7C72FF"
           variant="default"
