@@ -1,9 +1,7 @@
-import { PartialGuild } from "@/types";
-
 import axios from "axios";
 
 import { setGuild } from "@/redux/features/guild";
-import { setError } from "@/redux/features/error";
+import { setAlert } from "@/redux/features/alert";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -16,7 +14,6 @@ export default function useGuild(guildId: string) {
   useEffect(() => {
     if (!session?.accessToken) return;
     if (cache && cache.id == guildId) {
-      console.log(cache);
       console.log("[GUILD] Using cache");
       dispatch(setGuild(cache));
       return;
@@ -42,9 +39,12 @@ export default function useGuild(guildId: string) {
         setCache(data);
       })
       .catch((e) => {
-        setError({
-          message: e.message,
-        });
+        dispatch(
+          setAlert({
+            type: "error",
+            message: e.message,
+          })
+        );
       });
   }, [status, guildId]);
 }

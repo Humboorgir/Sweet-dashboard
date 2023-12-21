@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { resetSettings } from "@/redux/features/guildSettings";
+import { setAlert } from "@/redux/features/alert";
 
 import axios from "axios";
 
@@ -23,7 +24,11 @@ const SaveChangesButton = () => {
     axios
       .put(`/api/guild/${guild.id}`, guildSettings)
       .then((res) => res.data)
-      .then((res) => console.log(res));
+      .then((res) => dispatch(setAlert({ type: "success", message: res.message })))
+      .catch((err) => {
+        const { message: errMessage } = err.response.data;
+        dispatch(setAlert({ type: "error", message: errMessage }));
+      });
   }
 
   return (

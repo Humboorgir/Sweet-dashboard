@@ -15,8 +15,6 @@ const Page = () => {
   const router = useRouter();
 
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
-  const error = useSelector((state: RootState) => state.error.message);
-  if (error) console.log(error);
 
   const { serverId } = router.query;
 

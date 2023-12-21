@@ -20,13 +20,10 @@ const Page = () => {
   const dispatch = useDispatch();
 
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
-  const error = useSelector((state: RootState) => state.error.message);
   const welcomeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.welcomeMsgsEnabled);
   const goodbyeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.goodbyeMsgsEnabled);
   const goodbyeMsg = useSelector((state: RootState) => state.guildSettings.goodbyeMsg);
   const guild = useSelector((state: RootState) => state.guild);
-
-  if (error) console.log(error);
 
   const { serverId } = router.query;
 
