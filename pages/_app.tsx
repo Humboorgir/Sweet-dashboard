@@ -7,6 +7,7 @@ import { Roboto } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { Provider as ReduxProvider } from "@/redux/provider";
 
+import Alert from "@/components/shared/alert";
 import NextNProgress from "nextjs-progressbar";
 
 export type PageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <SessionProvider>
       <ReduxProvider>
+        <Alert />
         <NextNProgress color="#7C72FF" options={{ showSpinner: false }} />
         <main className={roboto.className}>{getLayout(<Component {...pageProps} />)}</main>
       </ReduxProvider>
