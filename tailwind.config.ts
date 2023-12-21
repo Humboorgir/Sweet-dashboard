@@ -17,6 +17,7 @@ const config: Config = {
       animation: {
         ripple: "ripple 600ms linear",
         fadeIn: "fadeIn 150ms",
+        alertOpen: "alertOpen 200ms",
       },
       keyframes: {
         fadeIn: {
@@ -26,6 +27,10 @@ const config: Config = {
         ripple: {
           "0%": { opacity: "40%", transform: "scale(0)" },
           "100%": { opacity: "0%", transform: "scale(3)" },
+        },
+        alertOpen: {
+          "0%": { opacity: "0%", transform: "scale(0)" },
+          "100%": { opacity: "100%", transform: "scale(1)" },
         },
       },
     },

@@ -5,7 +5,7 @@ import { PartialGuild } from "@/types";
 import axios from "axios";
 
 import { setUserGuilds } from "@/redux/features/userGuilds";
-import { setError } from "@/redux/features/error";
+import { setAlert } from "@/redux/features/alert";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -40,9 +40,12 @@ export default function useGuilds() {
         dispatch(setUserGuilds(res));
       })
       .catch((e) => {
-        setError({
-          message: e.message,
-        });
+        dispatch(
+          setAlert({
+            type: "error",
+            message: e.message,
+          })
+        );
       });
   }, [status]);
 }

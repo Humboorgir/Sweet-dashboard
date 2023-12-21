@@ -6,10 +6,10 @@ import userGuilds from "@/redux/features/userGuilds";
 import mutualGuilds from "@/redux/features/mutualGuilds";
 import guildSettings from "@/redux/features/guildSettings";
 import guildChannels from "@/redux/features/guildChannels";
-import error from "@/redux/features/error";
+import alert from "@/redux/features/alert";
 
 export const store = configureStore({
-  reducer: { guild, sidebar, userGuilds, mutualGuilds, guildSettings, guildChannels, error },
+  reducer: { guild, sidebar, userGuilds, mutualGuilds, guildSettings, guildChannels, alert },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

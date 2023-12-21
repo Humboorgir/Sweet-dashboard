@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMutualGuilds } from "@/redux/features/mutualGuilds";
-import { setError } from "@/redux/features/error";
+import { setAlert } from "@/redux/features/alert";
 import { RootState } from "@/redux/store";
 
 const useMutualGuilds = () => {
@@ -35,11 +35,14 @@ const useMutualGuilds = () => {
 
         setCache(mutualGuilds);
         dispatch(setMutualGuilds(mutualGuilds));
-      } catch (e) {
-        // @ts-ignore
-        // axios errors
-        if (e.message) dispatch(setError(e.message));
-        console.log(e);
+      } catch (e: any) {
+        if (e.message)
+          dispatch(
+            setAlert({
+              type: "error",
+              message: e.message,
+            })
+          );
       }
     })();
   }, [status, userGuilds]);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { setGuildChannels } from "@/redux/features/guildChannels";
-import { setError } from "@/redux/features/error";
+import { setAlert } from "@/redux/features/alert";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -38,14 +38,16 @@ export default function useGuildChannels(guildId: string) {
             return { name: channel.name, id: channel.id };
           });
 
-        console.log(data);
         dispatch(setGuildChannels(data));
         setCache(data);
       })
       .catch((e) => {
-        setError({
-          message: e.message,
-        });
+        dispatch(
+          setAlert({
+            type: "error",
+            message: e.message,
+          })
+        );
       });
   }, [status, guildId]);
 }
