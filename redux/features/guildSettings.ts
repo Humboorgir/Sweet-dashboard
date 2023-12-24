@@ -14,7 +14,7 @@ type State = {
   goodbyeChannel: Channel;
 };
 
-const initialState = {
+export const initialState = {
   welcomeMsgsEnabled: false,
   welcomeMsg: "",
   welcomeChannel: { title: "", value: "" },

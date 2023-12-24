@@ -3,21 +3,31 @@ import Button from "@/components/shared/button";
 import { cn } from "@/lib/utils";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { initialState } from "@/redux/features/guildSettings";
 import { resetSettings } from "@/redux/features/guildSettings";
 import { setAlert } from "@/redux/features/alert";
 
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const SaveChangesButton = () => {
-  let modified;
+  const [modified, setModified] = useState(false);
   const guildSettings = useSelector((state: RootState) => state.guildSettings);
   const guild = useSelector((state: RootState) => state.guild);
-  if (guildSettings.welcomeMsgsEnabled == true || guildSettings.goodbyeMsgsEnabled == true) modified = true;
+
+  useEffect(() => {
+    let guildSettingsString = JSON.stringify(guildSettings);
+    let initialStateString = JSON.stringify(initialState);
+    if (guildSettingsString != initialStateString) setModified(true);
+    else setModified(false);
+  }, [guildSettings]);
 
   const dispatch = useDispatch();
+
   function resetGuildSettings() {
     dispatch(resetSettings());
   }
+
   function updateGuildSettings() {
     // for debugging purposes
     if (!guild.id) return console.log(`[UpdateGuildSettings] No guild.id was found`);
