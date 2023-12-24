@@ -1,12 +1,16 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
-import InviteBlocker from "@/components/dashboard/automod/inviteBlocker";
-import BlockBadWords from "@/components/dashboard/automod/blockBadWords";
-import BlockLinks from "@/components/dashboard/automod/blockLinks";
-import AntiSpam from "@/components/dashboard/automod/antiSpam";
+import SaveChanges from "@/components/dashboard/saveChanges";
+import Settings from "@/components/dashboard/automod/settings";
 
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import {
+  toggleAntiSpam,
+  toggleBlockBadWords,
+  toggleBlockLinks,
+  toggleInviteBlocker,
+} from "@/redux/features/automodSettings";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
@@ -16,7 +20,10 @@ const Page = () => {
   const guild = useSelector((state: RootState) => state.guild);
   const router = useRouter();
 
+  const dispatch = useDispatch();
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
+  const automodSettings = useSelector((state: RootState) => state.automodSettings);
+  const { inviteBlocker, blockBadWords, blockLinks, antiSpam } = automodSettings;
 
   const { serverId } = router.query;
 
@@ -29,7 +36,35 @@ const Page = () => {
       </div>
     );
 
+  // page content
   const title = `${guild.name} - Automod`;
+  const settings = [
+    {
+      name: "Invite Blocker",
+      description: "Deletes the message if a user is detected to be sending invite links",
+      checked: inviteBlocker.enabled,
+      onCheckedChange: () => dispatch(toggleInviteBlocker()),
+    },
+    {
+      name: "Block Bad Words",
+      description: "Deletes messages that contain configured blacklisted words",
+      checked: blockBadWords.enabled,
+      onCheckedChange: () => dispatch(toggleBlockBadWords()),
+    },
+    {
+      name: "Block Links",
+      description: "Deletes messages that contain any link outside discord",
+      checked: blockLinks.enabled,
+      onCheckedChange: () => dispatch(toggleBlockLinks()),
+    },
+    {
+      name: "Anti Spam",
+      description: "Deletes messages if they are detected to be spammed",
+      checked: antiSpam.enabled,
+      onCheckedChange: () => dispatch(toggleAntiSpam()),
+    },
+  ];
+
   return (
     <>
       {/* metadata   */}
@@ -39,13 +74,10 @@ const Page = () => {
 
       {/* page content  */}
       <div className="py-5 px-8 md:py-8">
+        {/* fixed element, displayed conditionally  */}
+        <SaveChanges />
         <h2 className="text-3xl text-gradient mb-5">Automod</h2>
-        <div className="flex items-center flex-wrap w-full">
-          <InviteBlocker />
-          <BlockBadWords />
-          <BlockLinks />
-          <AntiSpam />
-        </div>
+        <Settings settings={settings} />
       </div>
     </>
   );
