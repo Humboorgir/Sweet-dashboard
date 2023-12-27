@@ -19,7 +19,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   const { serverId } = router.query;
   // load guild data into the global state
-  console.log(serverId);
   useGuild(serverId ? String(serverId) : "");
   useGuilds();
   useMutualGuilds();

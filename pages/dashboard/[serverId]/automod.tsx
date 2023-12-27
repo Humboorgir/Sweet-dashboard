@@ -1,10 +1,12 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
 import SaveChanges from "@/components/dashboard/saveChanges";
 import Settings from "@/components/dashboard/automod/settings";
+import ConfigureModal from "@/components/dashboard/automod/configureModal";
 
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import type { RootState } from "@/redux/store";
 import {
   toggleAntiSpam,
   toggleBlockBadWords,
@@ -17,18 +19,18 @@ import { RiErrorWarningLine as Warning } from "react-icons/ri";
 import Head from "next/head";
 
 const Page = () => {
-  const guild = useSelector((state: RootState) => state.guild);
+  const [openModal, setOpenModal] = useState<null | string>(null);
   const router = useRouter();
-
   const dispatch = useDispatch();
+
+  const guild = useSelector((state: RootState) => state.guild);
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const automodSettings = useSelector((state: RootState) => state.automodSettings);
-  const { inviteBlocker, blockBadWords, blockLinks, antiSpam } = automodSettings;
 
+  const { inviteBlocker, blockBadWords, blockLinks, antiSpam } = automodSettings;
   const { serverId } = router.query;
 
   const isGuildInMutualGuilds = mutualGuilds.some((guild) => guild.id == serverId);
-
   if (!isGuildInMutualGuilds)
     return (
       <div className="p-5 font-bold text-xl flex items-center">
@@ -65,6 +67,14 @@ const Page = () => {
     },
   ];
 
+  function openConfigureModal(setting: string) {
+    setOpenModal(setting);
+  }
+
+  function closeConfigureModal() {
+    setOpenModal(null);
+  }
+
   return (
     <>
       {/* metadata   */}
@@ -77,8 +87,11 @@ const Page = () => {
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         <h2 className="text-3xl text-gradient mb-5">Automod</h2>
-        <Settings settings={settings} />
+        <Settings settings={settings} openConfigureModal={openConfigureModal} />
       </div>
+
+      {/* modal(s) */}
+      <ConfigureModal openModal={openModal} handleClose={closeConfigureModal} />
     </>
   );
 };

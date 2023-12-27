@@ -1,14 +1,12 @@
 import Button from "@/components/shared/button";
 import Switch from "@/components/shared/switch";
-import React from "react";
 
-const Setting = ({ setting }: { setting: any }) => {
+type Props = {
+  setting: any;
+  openConfigureModal: Function;
+};
+const Setting = ({ setting, openConfigureModal }: Props) => {
   const { name, description, checked, onCheckedChange } = setting;
-
-  function openConfigureModal() {
-    // TODO: implement this
-    return;
-  }
   return (
     <div
       className="border-neutral-700 bg-neutral-800 rounded-md p-3 max-w-xs h-40
@@ -24,7 +22,7 @@ const Setting = ({ setting }: { setting: any }) => {
       <Button
         className="bg-secondary/80 hover:bg-secondary/60 w-full"
         rippleColor="#7C72FF"
-        onClick={openConfigureModal}>
+        onClick={() => openConfigureModal(name)}>
         Configure
       </Button>
     </div>
