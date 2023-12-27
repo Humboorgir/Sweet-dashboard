@@ -14,6 +14,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-neutral-100 hover:bg-primary/90",
+        secondary: "bg-secondary-strong text-neutral-100 hover:bg-secondary-strong/80",
         outline: "border border-primary text-primary-soft",
         ghost: "hover:bg-primary/20 !px-2.5",
         link: "text-primary underline-offset-4 hover:underline",
@@ -40,6 +41,10 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, children, rippleColor, href, ...props }, ref) => {
+    // use secondary itself as the rippleColor if variant == secondary and rippleColor
+    // isn't specified
+    if (variant == "secondary" && !rippleColor) rippleColor = "#7C72FF";
+
     const Component = href ? Link : "button";
     return (
       <Component
