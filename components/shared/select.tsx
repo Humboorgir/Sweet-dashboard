@@ -1,14 +1,14 @@
 import Button from "@/components/shared/button";
 
 import { cn } from "@/lib/utils";
-import { HTMLAttributes, useState } from "react";
+import { useState } from "react";
 
 type Option = {
   title: string;
   value: string;
 };
 
-type Props = React.HTMLProps<HTMLDivElement> & {
+type Props = Omit<React.HTMLProps<HTMLDivElement>, "onChange"> & {
   children: React.ReactNode;
   options: Option[];
   btnClassName?: string;
