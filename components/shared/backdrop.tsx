@@ -3,12 +3,11 @@ import { cn } from "@/lib/utils";
 type Props = {
   children: React.ReactNode;
   open: boolean;
+  handleClose: React.MouseEventHandler;
   className?: string;
 };
 
-const Backdrop = ({ children, open, className, ...props }: Props) => {
-  // TODO: close the modal when backdrop is clicked
-  // not implementing this now cause I havent written the redux thingy yet
+const Backdrop = ({ children, open, handleClose, className, ...props }: Props) => {
   return (
     <div
       {...props}
@@ -17,7 +16,8 @@ const Backdrop = ({ children, open, className, ...props }: Props) => {
       invisible opacity-0 transition-all duration-200 z-[100]`,
         open && "!opacity-100 visible",
         className
-      )}>
+      )}
+      onClick={handleClose}>
       {children}
     </div>
   );
