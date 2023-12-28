@@ -6,17 +6,16 @@ import { BsMicMute as Mute } from "react-icons/bs";
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
 type Props = {
-  openModal: null | string;
+  openModal: { name: string; open: boolean };
   handleClose: React.MouseEventHandler;
 };
 
 const ConfigureModal = ({ openModal, handleClose }: Props) => {
   // TODO: clean up the code here
-  const open = openModal ? true : false;
   return (
-    <Modal open={open} handleClose={handleClose}>
+    <Modal open={openModal.open} handleClose={handleClose}>
       <form className="w-full h-full flex flex-col">
-        <h3 className="text-foreground text-xl tracking-tight mb-5">Configure {openModal}</h3>
+        <h3 className="text-foreground text-xl tracking-tight mb-5">Configure {openModal.name}</h3>
         <p className="text-foreground-soft mb-0.5 text-sm">Response to violations:</p>
         <div className="flex h-16 rounded-md bg-neutral-800 border border-neutral-700 p-3 pl-0 mb-2">
           <div className="h-full grid place-items-center w-14">

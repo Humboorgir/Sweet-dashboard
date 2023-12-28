@@ -19,7 +19,12 @@ import { RiErrorWarningLine as Warning } from "react-icons/ri";
 import Head from "next/head";
 
 const Page = () => {
-  const [openModal, setOpenModal] = useState<null | string>(null);
+  type Modal = {
+    name: string;
+    open: boolean;
+  };
+
+  const [openModal, setOpenModal] = useState<Modal>({ name: "", open: false });
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -68,11 +73,11 @@ const Page = () => {
   ];
 
   function openConfigureModal(setting: string) {
-    setOpenModal(setting);
+    setOpenModal({ name: setting, open: true });
   }
 
   function closeConfigureModal() {
-    setOpenModal(null);
+    setOpenModal((prev) => ({ name: prev.name, open: false }));
   }
 
   return (
