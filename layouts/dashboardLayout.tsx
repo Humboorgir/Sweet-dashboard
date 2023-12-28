@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useMutualGuilds();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground">
       <Navbar />
       <div className="flex min-w-screen">
         {/* sidebar (hidden by default on small screens) */}
