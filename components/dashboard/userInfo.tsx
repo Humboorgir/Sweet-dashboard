@@ -27,18 +27,38 @@ const UserInfo = () => {
   if (serverId || guild) return null;
 
   const iconUrl = session?.user.image ? session?.user.image : "";
+
+  const shouldDisplayImage = iconUrl && status != "loading";
+  const shouldDisplayPlaceholder = !iconUrl && status != "loading";
+
   return (
     <div
-      className="w-[280px] h-screen overflow-y-scroll rounded-3xl
+      className="w-[280px] h-screen overflow-y-scroll rounded-3xl text-foreground
       py-6 px-3 flex flex-col items-center bg-gradient-to-br from-secondary/60 to-secondary/30">
-      <Image
-        className="rounded-full mb-3 mx-auto bg-neutral-800"
-        src={iconUrl}
-        width={90}
-        height={90}
-        priority
-        alt={session?.user.name ? session?.user.name : ""}
-      />
+      {status == "loading" && (
+        <div className="rounded-full mb-3 mx-auto bg-neutral-800 h-[90px] w-[90px] animate-pulse"></div>
+      )}
+
+      {/* if the user has no set profile picture  */}
+      {shouldDisplayPlaceholder && (
+        <div
+          className="rounded-full mb-3 mx-auto bg-neutral-800 font-bold text-4xl
+           grid place-items-center h-[90px] w-[90px]">
+          <span>{session?.user.name.slice(0, 1)}</span>
+        </div>
+      )}
+
+      {/* if the user does have a profile picture  */}
+      {shouldDisplayImage && (
+        <Image
+          className="rounded-full mb-3 mx-auto bg-neutral-800"
+          src={iconUrl}
+          width={90}
+          height={90}
+          priority
+          alt={session?.user.name ? session?.user.name : ""}
+        />
+      )}
       <h3 className="text-lg font-bold mb-8">{session?.user.name}</h3>
       <h3 className="text-sm tracking-wider text-foreground/70 flex items-center mb-1 mr-auto font-normal">
         <ArrowDown className="text-sm mr-1.5 mb-1" /> Settings
