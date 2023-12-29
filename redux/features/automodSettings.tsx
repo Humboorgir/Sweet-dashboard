@@ -1,42 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type Action = "delete" | "mute";
-
 type State = {
   inviteBlocker: {
     enabled: boolean;
-    action: Action;
+    delete: boolean;
+    mute: boolean;
   };
   blockBadWords: {
     enabled: boolean;
-    action: Action;
+    delete: boolean;
+    mute: boolean;
   };
   blockLinks: {
     enabled: boolean;
-    action: Action;
+    delete: boolean;
+    mute: boolean;
   };
   antiSpam: {
     enabled: boolean;
-    action: Action;
+    delete: boolean;
+    mute: boolean;
   };
 };
 
 export const initialState = {
   inviteBlocker: {
     enabled: false,
-    action: "delete",
+    delete: false,
+    mute: false,
   },
   blockBadWords: {
     enabled: false,
-    action: "delete",
+    delete: false,
+    mute: false,
   },
   blockLinks: {
     enabled: false,
-    action: "delete",
+    delete: false,
+    mute: false,
   },
   antiSpam: {
     enabled: false,
-    action: "delete",
+    delete: false,
+    mute: false,
   },
 } as State;
 
@@ -59,19 +65,23 @@ export const automodSettings = createSlice({
     resetAutomodSettings: (state) => {
       state.inviteBlocker = {
         enabled: initialState.inviteBlocker.enabled,
-        action: initialState.inviteBlocker.action,
+        delete: initialState.inviteBlocker.delete,
+        mute: initialState.inviteBlocker.mute,
       };
       state.blockBadWords = {
         enabled: initialState.blockBadWords.enabled,
-        action: initialState.blockBadWords.action,
+        delete: initialState.blockBadWords.delete,
+        mute: initialState.blockBadWords.mute,
       };
       state.blockLinks = {
         enabled: initialState.blockLinks.enabled,
-        action: initialState.blockLinks.action,
+        delete: initialState.blockLinks.delete,
+        mute: initialState.blockLinks.mute,
       };
       state.antiSpam = {
         enabled: initialState.antiSpam.enabled,
-        action: initialState.antiSpam.action,
+        delete: initialState.antiSpam.delete,
+        mute: initialState.antiSpam.mute,
       };
     },
   },
