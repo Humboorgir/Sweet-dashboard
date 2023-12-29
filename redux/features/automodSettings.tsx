@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type State = {
   inviteBlocker: {
@@ -62,6 +62,18 @@ export const automodSettings = createSlice({
     toggleAntiSpam: (state) => {
       state.antiSpam.enabled = !state.antiSpam.enabled;
     },
+    toggleDelete: (
+      state,
+      action: PayloadAction<"inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam">
+    ) => {
+      state[action.payload].delete = !state[action.payload].delete;
+    },
+    toggleMute: (
+      state,
+      action: PayloadAction<"inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam">
+    ) => {
+      state[action.payload].mute = !state[action.payload].mute;
+    },
     resetAutomodSettings: (state) => {
       state.inviteBlocker = {
         enabled: initialState.inviteBlocker.enabled,
@@ -92,6 +104,8 @@ export const {
   toggleBlockBadWords,
   toggleBlockLinks,
   toggleAntiSpam,
+  toggleDelete,
+  toggleMute,
   resetAutomodSettings,
 } = automodSettings.actions;
 export default automodSettings.reducer;
