@@ -8,8 +8,7 @@ const DeleteMessageBox = () => {
       </div>
       <div className="grow h-full flex flex-col">
         <h4>Delete message</h4>
-        {/* idk what to say here ill probably change it later  */}
-        <p className="text-xs text-foreground-soft/80">Delete the message breaking configured rules</p>
+        <p className="text-xs text-foreground-soft/80">Deletes rule-violating messages sent by the member</p>
       </div>
     </div>
   );

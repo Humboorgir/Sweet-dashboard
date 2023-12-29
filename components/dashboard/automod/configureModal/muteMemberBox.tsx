@@ -8,7 +8,9 @@ const MuteMemberBox = () => {
       </div>
       <div className="grow h-full flex flex-col">
         <h4>Mute member</h4>
-        <p className="text-xs text-foreground-soft/80">Block members from sending messages</p>
+        <p className="text-xs text-foreground-soft/80">
+          Temporarily restricts the member from sending messages
+        </p>
       </div>
     </div>
   );
