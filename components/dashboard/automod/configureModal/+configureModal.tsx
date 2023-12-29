@@ -6,7 +6,6 @@ import Title from "./title";
 import DeleteMessageBox from "./deleteMessageBox";
 import MuteMemberBox from "./muteMemberBox";
 
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { toggleDelete, toggleMute } from "@/redux/features/automodSettings";
