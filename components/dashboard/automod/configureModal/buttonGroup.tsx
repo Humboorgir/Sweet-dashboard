@@ -10,7 +10,7 @@ export default function ButtonGroup({ handleClose }: { handleClose: React.MouseE
         onClick={handleClose}>
         Cancel
       </Button>
-      <Button type="button" variant="secondary">
+      <Button type="submit" variant="secondary">
         Save Configuration
       </Button>
     </div>

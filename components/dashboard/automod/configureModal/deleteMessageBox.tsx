@@ -1,8 +1,20 @@
+import { cn } from "@/lib/utils";
+
 import { FaRegTrashCan as Trash } from "react-icons/fa6";
 
-const DeleteMessageBox = () => {
+type Props = {
+  deleteMessage: boolean;
+  toggleDeleteMessage: React.MouseEventHandler;
+};
+
+const DeleteMessageBox = ({ deleteMessage, toggleDeleteMessage }: Props) => {
   return (
-    <div className="flex h-16 rounded-md bg-neutral-800 border border-neutral-700 p-3 pl-0 mb-2">
+    <div
+      onClick={toggleDeleteMessage}
+      className={cn(
+        "flex h-16 rounded-md bg-[#191919] border border-[#303030] p-3 pl-0 mb-2 cursor-pointer",
+        deleteMessage && "bg-neutral-800 border-neutral-700"
+      )}>
       <div className="h-full grid place-items-center w-14">
         <Trash className="text-xl" />
       </div>

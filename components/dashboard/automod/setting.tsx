@@ -6,7 +6,7 @@ type Props = {
   openConfigureModal: Function;
 };
 const Setting = ({ setting, openConfigureModal }: Props) => {
-  const { name, description, checked, onCheckedChange } = setting;
+  const { name, value, description, checked, onCheckedChange } = setting;
   return (
     <div
       className="border-neutral-700 bg-neutral-800 rounded-md p-3 max-w-xs h-40
@@ -22,7 +22,7 @@ const Setting = ({ setting, openConfigureModal }: Props) => {
       <Button
         className="bg-secondary/80 hover:bg-secondary/60 w-full"
         rippleColor="#7C72FF"
-        onClick={() => openConfigureModal(name)}>
+        onClick={() => openConfigureModal(name, value)}>
         Configure
       </Button>
     </div>

@@ -19,12 +19,14 @@ import { RiErrorWarningLine as Warning } from "react-icons/ri";
 import Head from "next/head";
 
 const Page = () => {
+  type ModalValue = "inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam";
   type Modal = {
     name: string;
+    value: ModalValue;
     open: boolean;
   };
 
-  const [openModal, setOpenModal] = useState<Modal>({ name: "", open: false });
+  const [openModal, setOpenModal] = useState<Modal>({ name: "", value: "inviteBlocker", open: false });
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -48,36 +50,40 @@ const Page = () => {
   const settings = [
     {
       name: "Invite Blocker",
+      value: "inviteBlocker",
       description: "Deletes the message if a user is detected to be sending invite links",
       checked: inviteBlocker.enabled,
       onCheckedChange: () => dispatch(toggleInviteBlocker()),
     },
     {
       name: "Block Bad Words",
+      value: "blockBadWords",
       description: "Deletes messages that contain configured blacklisted words",
       checked: blockBadWords.enabled,
       onCheckedChange: () => dispatch(toggleBlockBadWords()),
     },
     {
       name: "Block Links",
+      value: "blockLinks",
       description: "Deletes messages that contain any link outside discord",
       checked: blockLinks.enabled,
       onCheckedChange: () => dispatch(toggleBlockLinks()),
     },
     {
       name: "Anti Spam",
+      value: "antiSpam",
       description: "Deletes messages if they are detected to be spammed",
       checked: antiSpam.enabled,
       onCheckedChange: () => dispatch(toggleAntiSpam()),
     },
   ];
 
-  function openConfigureModal(setting: string) {
-    setOpenModal({ name: setting, open: true });
+  function openConfigureModal(setting: string, value: ModalValue) {
+    setOpenModal({ name: setting, value: value, open: true });
   }
 
   function closeConfigureModal() {
-    setOpenModal((prev) => ({ name: prev.name, open: false }));
+    setOpenModal((prev) => ({ name: prev.name, value: prev.value, open: false }));
   }
 
   return (

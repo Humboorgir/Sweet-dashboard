@@ -2,6 +2,7 @@ import Setting from "@/components/dashboard/automod/setting";
 
 type Setting = {
   name: string;
+  value: string;
   description: string;
   checked: boolean;
   onCheckedChange: Function;

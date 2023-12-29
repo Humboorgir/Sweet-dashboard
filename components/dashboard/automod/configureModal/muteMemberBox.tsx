@@ -1,8 +1,20 @@
+import { cn } from "@/lib/utils";
+
 import { BsMicMute as Mute } from "react-icons/bs";
 
-const MuteMemberBox = () => {
+type Props = {
+  muteMember: boolean;
+  toggleMuteMember: React.MouseEventHandler;
+};
+
+const MuteMemberBox = ({ muteMember, toggleMuteMember }: Props) => {
   return (
-    <div className="flex h-16 rounded-md bg-neutral-800 border border-neutral-700 p-3 pl-0 mb-4">
+    <div
+      onClick={toggleMuteMember}
+      className={cn(
+        "relative flex h-16 rounded-md bg-[#191919] border border-[#303030] p-3 pl-0 mb-4 cursor-pointer",
+        muteMember && `bg-neutral-800 border-neutral-700`
+      )}>
       <div className="h-full grid place-items-center w-14">
         <Mute className="text-xl" />
       </div>
