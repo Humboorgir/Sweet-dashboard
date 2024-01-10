@@ -9,9 +9,12 @@ import { MdDriveFileRenameOutline as Pen, MdOutlineAdminPanelSettings as Admin }
 import { VscGistSecret as Secret } from "react-icons/vsc";
 
 import Head from "next/head";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Page = () => {
-  const guild = useSelector((state: RootState) => state.guild);
+  // const guild = useSelector((state: RootState) => state.guild);
+  const guild = {} as any;
   const router = useRouter();
 
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
@@ -29,7 +32,7 @@ const Page = () => {
 
   const title = `${guild.name} - Overview`;
   return (
-    <>
+    <SkeletonTheme baseColor="#202020" highlightColor="#444">
       {/* metadata   */}
       <Head>
         <title>{title}</title>
@@ -63,13 +66,17 @@ const Page = () => {
                   <span className="text-2xl mr-2">{info.icon} </span>
                   <h3 className="text-xl">{info.title}</h3>
                 </div>
-                <p className="text-foreground-soft">{info.data}</p>
+                {info.data ? (
+                  <p className="text-foreground-soft">{info.data}</p>
+                ) : (
+                  <Skeleton containerClassName="w-full" height={20} />
+                )}
               </div>
             );
           })}
         </div>
       </div>
-    </>
+    </SkeletonTheme>
   );
 };
 
