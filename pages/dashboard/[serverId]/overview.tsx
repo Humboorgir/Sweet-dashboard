@@ -13,8 +13,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const Page = () => {
-  // const guild = useSelector((state: RootState) => state.guild);
-  const guild = {} as any;
+  const guild = useSelector((state: RootState) => state.guild);
   const router = useRouter();
 
   const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
