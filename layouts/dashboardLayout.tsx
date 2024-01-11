@@ -3,25 +3,25 @@ import Guilds from "@/components/dashboard/guilds";
 import GuildInfo from "@/components/dashboard/guildInfo";
 import UserInfo from "@/components/dashboard/userInfo";
 
-import useGuild from "@/hooks/useGuild";
 import useGuilds from "@/hooks/useGuilds";
-import useMutualGuilds from "@/hooks/useMutualGuilds";
 
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
 
 import { RootState } from "@/redux/store";
+import fetchUserGuilds from "@/lib/api/fetchUserGuilds";
+import { useSession } from "next-auth/react";
+import { setUserGuilds } from "@/redux/features/userGuilds";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
   const sidebarOpen = useSelector((state: RootState) => state.sidebar.open);
 
-  const { serverId } = router.query;
-  // load guild data into the global state
-  useGuild(serverId ? String(serverId) : "");
-  useGuilds();
-  useMutualGuilds();
+  const dispatch = useDispatch();
+  const { data: session } = useSession();
+  const { data, isLoading } = fetchUserGuilds(session);
+  if (data) {
+    dispatch(setUserGuilds(data));
+  }
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">

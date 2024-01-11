@@ -1,7 +1,6 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 import { IoPeopleSharp as People } from "react-icons/io5";
@@ -11,18 +10,19 @@ import { VscGistSecret as Secret } from "react-icons/vsc";
 import Head from "next/head";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import fetchGuildInfo from "@/lib/api/fetchGuildInfo";
+import { setGuild } from "@/redux/features/guild";
 
 const Page = () => {
-  const guild = useSelector((state: RootState) => state.guild);
   const router = useRouter();
-
-  const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
-
+  const dispatch = useDispatch();
   const { serverId } = router.query;
+  const { data: guild, isLoading } = fetchGuildInfo(serverId);
+  if (guild) {
+    dispatch(setGuild(guild));
+  }
 
-  const isGuildInMutualGuilds = mutualGuilds.some((guild) => guild.id == serverId);
-
-  if (!isGuildInMutualGuilds)
+  if (!guild)
     return (
       <div className="p-5 font-bold text-xl flex items-center">
         This server requires setup <Warning className="text-xl ml-2" />
