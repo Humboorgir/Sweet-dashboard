@@ -8,9 +8,7 @@ type State = {
   roleCount: number;
 };
 
-const initialState = {
-    
-} as State;
+const initialState = {} as State;
 
 export const guild = createSlice({
   name: "guild",

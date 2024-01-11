@@ -4,35 +4,41 @@ import WelcomeMessagesInputs from "@/components/dashboard/welcomer/welcomeMessag
 import GoodbyeMessagesInputs from "@/components/dashboard/welcomer/goodbyeMessagesInputs";
 import Switch from "@/components/shared/switch";
 
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { cn } from "@/lib/utils";
 import { RootState } from "@/redux/store";
 import { toggleGoodbyeMsgs, toggleWelcomeMsgs } from "@/redux/features/guildSettings";
+import { setGuildChannels } from "@/redux/features/guildChannels";
+import { setGuild } from "@/redux/features/guild";
+import { setAlert } from "@/redux/features/alert";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
 import Head from "next/head";
-import useGuildChannels from "@/hooks/useGuildChannels";
+import fetchGuildChannels from "@/lib/api/fetchGuildChannels";
+import fetchGuildInfo from "@/lib/api/fetchGuildInfo";
 
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const welcomeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.welcomeMsgsEnabled);
   const goodbyeMsgsEnabled = useSelector((state: RootState) => state.guildSettings.goodbyeMsgsEnabled);
-  const goodbyeMsg = useSelector((state: RootState) => state.guildSettings.goodbyeMsg);
-  const guild = useSelector((state: RootState) => state.guild);
-
   const { serverId } = router.query;
 
-  // fetch and load guild channels into the global state
-  useGuildChannels(serverId ? String(serverId) : "");
+  const { data, error } = fetchGuildChannels(serverId);
+  const { data: guild, isLoading } = fetchGuildInfo(serverId);
 
-  const isGuildInMutualGuilds = mutualGuilds.some((guild) => guild.id == serverId);
+  if (error) {
+    dispatch(setAlert({ type: "error", message: "Failed to fetch guild channels" }));
+  }
 
-  if (!isGuildInMutualGuilds)
+  dispatch(setGuildChannels(data));
+  if (guild) {
+    dispatch(setGuild(guild));
+  }
+
+  if (!guild)
     return (
       <div className="p-5 font-bold text-xl flex items-center">
         This server requires setup <Warning className="text-xl ml-2" />

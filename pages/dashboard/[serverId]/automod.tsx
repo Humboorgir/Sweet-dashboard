@@ -13,10 +13,12 @@ import {
   toggleBlockLinks,
   toggleInviteBlocker,
 } from "@/redux/features/automodSettings";
+import { setGuild } from "@/redux/features/guild";
 
 import { RiErrorWarningLine as Warning } from "react-icons/ri";
 
 import Head from "next/head";
+import fetchGuildInfo from "@/lib/api/fetchGuildInfo";
 
 const Page = () => {
   type ModalValue = "inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam";
@@ -29,16 +31,16 @@ const Page = () => {
   const [openModal, setOpenModal] = useState<Modal>({ name: "", value: "inviteBlocker", open: false });
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const guild = useSelector((state: RootState) => state.guild);
-  const mutualGuilds = useSelector((state: RootState) => state.mutualGuilds.data);
   const automodSettings = useSelector((state: RootState) => state.automodSettings);
-
   const { inviteBlocker, blockBadWords, blockLinks, antiSpam } = automodSettings;
-  const { serverId } = router.query;
 
-  const isGuildInMutualGuilds = mutualGuilds.some((guild) => guild.id == serverId);
-  if (!isGuildInMutualGuilds)
+  const { serverId } = router.query;
+  const { data: guild, isLoading } = fetchGuildInfo(serverId);
+  if (guild) {
+    dispatch(setGuild(guild));
+  }
+
+  if (!guild)
     return (
       <div className="p-5 font-bold text-xl flex items-center">
         This server requires setup <Warning className="text-xl ml-2" />

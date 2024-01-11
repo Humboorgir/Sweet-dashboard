@@ -14,11 +14,10 @@ import { FaRobot as Robot } from "react-icons/fa6";
 
 const GuildInfo = () => {
   const router = useRouter();
-  const userGuilds = useSelector((state: RootState) => state.userGuilds.data);
-
   const { serverId } = router.query;
-  const guild = userGuilds.filter((guild) => guild.id == serverId)[0];
-  if (!serverId || !guild) return null;
+
+  const guild = useSelector((state: RootState) => state.guild);
+  if (!guild) return null;
 
   // page content
   const iconUrl = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`;
