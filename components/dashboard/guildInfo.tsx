@@ -17,7 +17,7 @@ const GuildInfo = () => {
   const { serverId } = router.query;
 
   const guild = useSelector((state: RootState) => state.guild);
-  if (!guild) return null;
+  if (!guild || !serverId) return null;
 
   // page content
   const iconUrl = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`;
