@@ -6,10 +6,9 @@ import Title from "./title";
 import DeleteMessageBox from "./deleteMessageBox";
 import MuteMemberBox from "./muteMemberBox";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
 import { setDelete, setMute } from "@/redux/features/automodSettings";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Props = {
   openModal: {
@@ -17,7 +16,7 @@ type Props = {
     value: "inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam";
     open: boolean;
   };
-  handleClose: React.MouseEventHandler;
+  handleClose: Function;
 };
 
 const ConfigureModal = ({ openModal, handleClose }: Props) => {
@@ -29,6 +28,7 @@ const ConfigureModal = ({ openModal, handleClose }: Props) => {
     antiSpam: false,
     blockBadWords: false,
   });
+
   const [muteMember, setMuteMember] = useState({
     inviteBlocker: false,
     blockLinks: false,
@@ -50,11 +50,15 @@ const ConfigureModal = ({ openModal, handleClose }: Props) => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
     dispatch(setDelete({ setting: openModal.value, value: deleteMessage[openModal.value] }));
     dispatch(setMute({ setting: openModal.value, value: muteMember[openModal.value] }));
+
+    handleClose();
   }
+
   return (
-    <Modal open={openModal.open} handleClose={handleClose}>
+    <Modal open={openModal.open} handleClose={() => handleClose()}>
       <form onSubmit={handleSubmit} className="w-full h-full flex flex-col">
         <Title openModal={openModal} />
         <p className="text-foreground-soft mb-0.5 text-sm">Response to violations:</p>
@@ -67,7 +71,7 @@ const ConfigureModal = ({ openModal, handleClose }: Props) => {
 
         <AdministratorNotice />
 
-        <ButtonGroup handleClose={handleClose} />
+        <ButtonGroup handleClose={() => handleClose()} />
       </form>
     </Modal>
   );

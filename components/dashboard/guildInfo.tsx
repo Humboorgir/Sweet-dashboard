@@ -16,18 +16,6 @@ const GuildInfo = () => {
   const router = useRouter();
   const { serverId } = router.query;
 
-  // TODO: here's how its gonna work:
-  // 1- in the automod page, for each automod option component,
-  // there will be a few states storing the internal state of the Component,
-  // once you click save, it will update the redux state
-  // 2- unlike the current system, I'll make it so that
-  // each guild settings section (automod, welcomer, ...) gets
-  // their own seperate redux reducer, and when you save guild settings,
-  // it only saves it for that current section
-  // Though I'm not sure how to lazy load redux data
-  // because I don't want all guild settings to be loaded at once
-  // when I only need one (like automod for instance)
-
   const guild = useSelector((state: RootState) => state.guild);
   if (!guild || !serverId) return null;
 

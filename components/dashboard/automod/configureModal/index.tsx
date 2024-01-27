@@ -1,1 +1,1 @@
-export { default } from "./+configureModal";
+export { default } from "./configureModal";
