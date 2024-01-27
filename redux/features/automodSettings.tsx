@@ -62,17 +62,23 @@ export const automodSettings = createSlice({
     toggleAntiSpam: (state) => {
       state.antiSpam.enabled = !state.antiSpam.enabled;
     },
-    toggleDelete: (
+    setDelete: (
       state,
-      action: PayloadAction<"inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam">
+      action: PayloadAction<{
+        setting: "inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam";
+        value: boolean;
+      }>
     ) => {
-      state[action.payload].delete = !state[action.payload].delete;
+      state[action.payload.setting].delete = action.payload.value;
     },
-    toggleMute: (
+    setMute: (
       state,
-      action: PayloadAction<"inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam">
+      action: PayloadAction<{
+        setting: "inviteBlocker" | "blockBadWords" | "blockLinks" | "antiSpam";
+        value: boolean;
+      }>
     ) => {
-      state[action.payload].mute = !state[action.payload].mute;
+      state[action.payload.setting].mute = action.payload.value;
     },
     resetAutomodSettings: (state) => {
       state.inviteBlocker = {
@@ -104,8 +110,8 @@ export const {
   toggleBlockBadWords,
   toggleBlockLinks,
   toggleAntiSpam,
-  toggleDelete,
-  toggleMute,
+  setDelete,
+  setMute,
   resetAutomodSettings,
 } = automodSettings.actions;
 export default automodSettings.reducer;

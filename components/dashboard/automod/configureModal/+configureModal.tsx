@@ -8,7 +8,8 @@ import MuteMemberBox from "./muteMemberBox";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { toggleDelete, toggleMute } from "@/redux/features/automodSettings";
+import { setDelete, setMute } from "@/redux/features/automodSettings";
+import { useEffect, useState } from "react";
 
 type Props = {
   openModal: {
@@ -21,28 +22,48 @@ type Props = {
 
 const ConfigureModal = ({ openModal, handleClose }: Props) => {
   const dispatch = useDispatch();
-  const deleteMessage = useSelector((state: RootState) => state.automodSettings[openModal.value].delete);
-  const muteMember = useSelector((state: RootState) => state.automodSettings[openModal.value].mute);
+
+  const [deleteMessage, setDeleteMessage] = useState({
+    inviteBlocker: false,
+    blockLinks: false,
+    antiSpam: false,
+    blockBadWords: false,
+  });
+  const [muteMember, setMuteMember] = useState({
+    inviteBlocker: false,
+    blockLinks: false,
+    antiSpam: false,
+    blockBadWords: false,
+  });
 
   function toggleDeleteMessage() {
-    dispatch(toggleDelete(openModal.value));
+    setDeleteMessage((prev) => {
+      return { ...prev, [openModal.value]: !prev[openModal.value] };
+    });
   }
 
   function toggleMuteMember() {
-    dispatch(toggleMute(openModal.value));
+    setMuteMember((prev) => {
+      return { ...prev, [openModal.value]: !prev[openModal.value] };
+    });
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    dispatch(setDelete({ setting: openModal.value, value: deleteMessage[openModal.value] }));
+    dispatch(setMute({ setting: openModal.value, value: muteMember[openModal.value] }));
   }
   return (
     <Modal open={openModal.open} handleClose={handleClose}>
       <form onSubmit={handleSubmit} className="w-full h-full flex flex-col">
         <Title openModal={openModal} />
         <p className="text-foreground-soft mb-0.5 text-sm">Response to violations:</p>
-        <DeleteMessageBox deleteMessage={deleteMessage} toggleDeleteMessage={toggleDeleteMessage} />
+        <DeleteMessageBox
+          deleteMessage={deleteMessage[openModal.value]}
+          toggleDeleteMessage={toggleDeleteMessage}
+        />
 
-        <MuteMemberBox muteMember={muteMember} toggleMuteMember={toggleMuteMember} />
+        <MuteMemberBox muteMember={muteMember[openModal.value]} toggleMuteMember={toggleMuteMember} />
 
         <AdministratorNotice />
 
