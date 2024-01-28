@@ -6,9 +6,10 @@ import Title from "./title";
 import DeleteMessageBox from "./deleteMessageBox";
 import MuteMemberBox from "./muteMemberBox";
 
-import { useDispatch } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { setDelete, setMute } from "@/redux/features/automodSettings";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   openModal: {
@@ -21,20 +22,29 @@ type Props = {
 
 const ConfigureModal = ({ openModal, handleClose }: Props) => {
   const dispatch = useDispatch();
+  const deleteMessageRedux = useSelector(
+    (state: RootState) => state.automodSettings[openModal.value].delete
+  );
+  const muteMemberRedux = useSelector((state: RootState) => state.automodSettings[openModal.value].mute);
 
-  const [deleteMessage, setDeleteMessage] = useState({
+  const initialState = {
     inviteBlocker: false,
     blockLinks: false,
     antiSpam: false,
     blockBadWords: false,
-  });
+  };
 
-  const [muteMember, setMuteMember] = useState({
-    inviteBlocker: false,
-    blockLinks: false,
-    antiSpam: false,
-    blockBadWords: false,
-  });
+  const [deleteMessage, setDeleteMessage] = useState(initialState);
+  const [muteMember, setMuteMember] = useState(initialState);
+
+  useEffect(() => {
+    setDeleteMessage((prev) => {
+      return { ...prev, [openModal.value]: deleteMessageRedux };
+    });
+    setMuteMember((prev) => {
+      return { ...prev, [openModal.value]: muteMemberRedux };
+    });
+  }, [openModal.open]);
 
   function toggleDeleteMessage() {
     setDeleteMessage((prev) => {
