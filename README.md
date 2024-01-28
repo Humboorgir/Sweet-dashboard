@@ -1,7 +1,3 @@
-## NOT FINISHED
-
-The project is still in progress
-
 ## Sweet's dashboard
 
 Built with Next.js, Next-auth and Tailwindcss
