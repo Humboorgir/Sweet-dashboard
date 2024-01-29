@@ -20,7 +20,7 @@ const Setting = ({ setting, openConfigureModal }: Props) => {
       <p className="text-foreground-soft/80 text-sm mb-4">{description}</p>
 
       <Button
-        className="bg-secondary/80 hover:bg-secondary/60 w-full"
+        className="bg-secondary/60 hover:bg-secondary/70 w-full"
         rippleColor="#7C72FF"
         onClick={() => openConfigureModal(name, value)}>
         Configure
