@@ -22,9 +22,11 @@ type Props = {
 
 const ConfigureModal = ({ openModal, handleClose }: Props) => {
   const dispatch = useDispatch();
-  const deleteMessageRedux = useSelector(
-    (state: RootState) => state.automodSettings[openModal.value].delete
-  );
+
+  // global state
+
+  // prettier-ignore
+  const deleteMessageRedux = useSelector((state: RootState) => state.automodSettings[openModal.value].delete);
   const muteMemberRedux = useSelector((state: RootState) => state.automodSettings[openModal.value].mute);
 
   const initialState = {
@@ -34,9 +36,11 @@ const ConfigureModal = ({ openModal, handleClose }: Props) => {
     blockBadWords: false,
   };
 
+  // local state (reset when modal is closed)
   const [deleteMessage, setDeleteMessage] = useState(initialState);
   const [muteMember, setMuteMember] = useState(initialState);
 
+  // reset local state to global state values when modal is closed
   useEffect(() => {
     setDeleteMessage((prev) => {
       return { ...prev, [openModal.value]: deleteMessageRedux };
