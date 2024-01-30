@@ -12,15 +12,39 @@ const reqBool = {
 const guildSchema = new mongoose.Schema({
   id: reqString,
   settings: {
-    welcome: {
-      enabled: reqBool,
-      channelId: reqString,
-      message: reqString,
+    welcomer: {
+      welcome: {
+        enabled: reqBool,
+        channelId: reqString,
+        message: reqString,
+      },
+      goodbye: {
+        enabled: reqBool,
+        channelId: reqString,
+        message: reqString,
+      },
     },
-    goodbye: {
-      enabled: reqBool,
-      channelId: reqString,
-      message: reqString,
+    automod: {
+      inviteBlocker: {
+        enabled: reqBool,
+        delete: reqBool,
+        mute: reqBool,
+      },
+      blockBadWords: {
+        enabled: reqBool,
+        delete: reqBool,
+        mute: reqBool,
+      },
+      blockLinks: {
+        enabled: reqBool,
+        delete: reqBool,
+        mute: reqBool,
+      },
+      antiSpam: {
+        enabled: reqBool,
+        delete: reqBool,
+        mute: reqBool,
+      },
     },
   },
 });
