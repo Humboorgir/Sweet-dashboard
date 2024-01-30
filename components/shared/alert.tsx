@@ -48,16 +48,16 @@ const Alert = () => {
       {open && (
         <motion.div
           initial={{
-            opacity: 88,
-            scale: 0,
+            scale: 0.88,
+            opacity: 0,
           }}
           animate={{
-            opacity: 1,
             scale: 1,
+            opacity: 1,
           }}
           exit={{
-            opacity: 0.88,
-            scale: 0,
+            scale: 0.88,
+            opacity: 0,
           }}
           transition={{
             ease: cubicBezier(0.33, 1, 0.68, 1),
