@@ -72,7 +72,7 @@ const Page = () => {
         </p>
 
         {/* Welcome message and channel input */}
-        {welcomeMsgsEnabled && <WelcomeMessagesInputs />}
+        <WelcomeMessagesInputs enabled={welcomeMsgsEnabled} />
 
         {/* Goodbye messages ~ text & switch */}
         <div className="flex items-center">
@@ -85,7 +85,7 @@ const Page = () => {
         </div>
         <p className="text-gradient-soft text-lg mb-1">Sent when a user leaves the server.</p>
         {/* Goodbye message and channel input  */}
-        {goodbyeMsgsEnabled && <GoodbyeMessagesInputs />}
+        <GoodbyeMessagesInputs enabled={goodbyeMsgsEnabled} />
       </div>
     </>
   );
