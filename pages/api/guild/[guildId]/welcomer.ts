@@ -1,35 +1,43 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
+
 import guildModel from "@/models/guild";
 import mongoConnect from "@/lib/mongoConnect";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!process.env.DISCORD_BOT_TOKEN)
-    console.log("[WARNING] Couldn't find process.env.DISCORD_BOT_TOKEN");
-
   const { guildId } = req.query;
   if (!guildId) return res.status(400);
 
   // handling PUT requests
   if (req.method == "PUT") {
-    // TODO: rewrite all this with zod
-    // (too lazy to write their types right now even tho it would probably take less time)
+    const requestSchema = z.object({
+      welcomeMsgsEnabled: z.boolean(),
+      welcomeMsg: z.string(),
+      welcomeChannel: z.object({
+        title: z.string(),
+        value: z.string(),
+      }),
+      goodbyeMsgsEnabled: z.boolean(),
+      goodbyeMsg: z.string(),
+      goodbyeChannel: z.object({
+        title: z.string(),
+        value: z.string(),
+      }),
+    });
+
+    type Request = z.infer<typeof requestSchema>;
+
+    // schema validation
+    const request = requestSchema.safeParse(req.body);
+    if (!request.success) return res.status(400).send(request.error.issues[0].message);
     const {
       welcomeMsgsEnabled,
-      welcomeMsg,
       welcomeChannel,
+      welcomeMsg,
       goodbyeMsgsEnabled,
-      goodbyeMsg,
       goodbyeChannel,
-    } = req.body;
-    if (
-      typeof welcomeMsgsEnabled != "boolean" ||
-      !welcomeMsg ||
-      !welcomeChannel ||
-      typeof goodbyeMsgsEnabled != "boolean" ||
-      !goodbyeMsg ||
-      !goodbyeChannel
-    )
-      return res.status(400);
+      goodbyeMsg,
+    } = request.data as Request;
 
     // db stuff
     const filter = { id: guildId };
