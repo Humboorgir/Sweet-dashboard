@@ -1,5 +1,5 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
-import SaveChanges from "@/components/dashboard/saveChanges";
+import SaveChanges from "@/components/dashboard/welcomer/saveChanges";
 import WelcomeMessagesInputs from "@/components/dashboard/welcomer/welcomeMessagesInputs";
 import GoodbyeMessagesInputs from "@/components/dashboard/welcomer/goodbyeMessagesInputs";
 import Switch from "@/components/shared/switch";

@@ -1,5 +1,5 @@
 import DashboardLayout from "@/layouts/dashboardLayout";
-import SaveChanges from "@/components/dashboard/saveChanges";
+import SaveChanges from "@/components/dashboard/automod/saveChanges";
 import Settings from "@/components/dashboard/automod/settings";
 import ConfigureModal from "@/components/dashboard/automod/configureModal";
 

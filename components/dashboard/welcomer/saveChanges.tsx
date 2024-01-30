@@ -5,8 +5,6 @@ import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { initialState as guildSettingsInitial } from "@/redux/features/guildSettings";
 import { resetSettings as resetGuildSettings } from "@/redux/features/guildSettings";
-import { initialState as automodSettingsInitial } from "@/redux/features/automodSettings";
-import { resetAutomodSettings } from "@/redux/features/automodSettings";
 import { setAlert } from "@/redux/features/alert";
 
 import axios from "axios";
@@ -15,7 +13,6 @@ import { useEffect, useState } from "react";
 const SaveChangesButton = () => {
   const [modified, setModified] = useState(false);
   const guildSettings = useSelector((state: RootState) => state.guildSettings);
-  const automodSettings = useSelector((state: RootState) => state.automodSettings);
   const guild = useSelector((state: RootState) => state.guild);
 
   // detecting changes in guildSettings (i'll rename it to welcomerSettings later)
@@ -26,28 +23,18 @@ const SaveChangesButton = () => {
     else setModified(false);
   }, [guildSettings]);
 
-  // detecting changes in automodSettings
-  useEffect(() => {
-    let automodSettingsString = JSON.stringify(automodSettings);
-    let initialStateString = JSON.stringify(automodSettingsInitial);
-    if (automodSettingsString != initialStateString) setModified(true);
-    else setModified(false);
-  }, [automodSettings]);
-
   const dispatch = useDispatch();
 
   function resetSettings() {
     dispatch(resetGuildSettings());
-    dispatch(resetAutomodSettings());
   }
 
   function updateGuildSettings() {
     // for debugging purposes
     if (!guild.id) return console.log(`[UpdateGuildSettings] No guild.id was found`);
 
-    // TODO: make this work with automod settings
     axios
-      .put(`/api/guild/${guild.id}`, guildSettings)
+      .put(`/api/guild/${guild.id}/welcomer`, guildSettings)
       .then((res) => res.data)
       .then((res) => dispatch(setAlert({ type: "success", message: res.message })))
       .catch((err) => {
