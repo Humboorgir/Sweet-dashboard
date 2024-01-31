@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // db stuff
     const filter = { id: guildId };
     const newData = {
-      settings: {
+      welcomerSettings: {
         welcome: {
           enabled: welcomeMsgsEnabled,
           channelId: welcomeChannel.value,
@@ -59,9 +59,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     mongoConnect();
     guildModel // upsert makes it so that if such document doesnt exist, it creates one
       .findOneAndUpdate(filter, newData, { upsert: true })
-      .then(() => res.status(200).json({ message: "Successfully saved guild settings" }))
+      .then(() => res.status(200).json({ message: "Successfully saved Welcomer settings" }))
       .catch((e) => {
-        res.status(500).json({ message: "Failed to save guild settings" });
+        res.status(500).json({ message: "Failed to save Welcomer settings" });
         return console.log(e);
       });
   }
