@@ -55,7 +55,7 @@ const Page = () => {
       </Head>
 
       {/* page content */}
-      <div className="pt-5 pb-28 px-8 md:pt-8 max-w-[100%]">
+      <div className="pt-5 pb-48 px-8 md:pt-8 max-w-[100%]">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         {/* Welcome messages ~ text & switch */}

@@ -96,7 +96,7 @@ const Page = () => {
       </Head>
 
       {/* page content  */}
-      <div className="py-5 px-8 md:py-8">
+      <div className="pt-5 px-8 md:pt-8">
         {/* fixed element, displayed conditionally  */}
         <SaveChanges />
         <h2 className="text-3xl text-gradient mb-5">Automod</h2>
