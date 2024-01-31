@@ -21,12 +21,12 @@ const Option = ({ title, icon, serverId, href }: Props) => {
       href={`/dashboard/${serverId}/${href}`}
       className={cn(
         `flex items-center hover:bg-secondary/10 w-full justify-start`,
-        selected &&
-          `bg-clip-border bg-gradient-to-br from-secondary/40 to-secondary/20
-            text-foreground rounded-md`
+        selected && `bg-gradient-to-br from-secondary-strong/40 to-secondary/40 rounded-md`
       )}>
-      <span className="text-base mr-2 text-foreground/80">{icon}</span>
-      <h3 className="text-gradient to-foreground-soft">{title}</h3>
+      <span className={cn("text-base mr-2 text-foreground/80", selected && "text-white/90")}>
+        {icon}
+      </span>
+      <h3 className={cn("text-gradient to-foreground-soft", selected && "text-white/90")}>{title}</h3>
     </Button>
   );
 };
