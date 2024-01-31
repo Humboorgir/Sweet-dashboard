@@ -44,6 +44,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     mongoConnect();
+
+    await new Promise((r) => setTimeout(r, 2000));
+
     guildModel
       .findOneAndUpdate(filter, newData, { upsert: true })
       .then(() => res.status(200).json({ message: "Successfully updated Automod settings" }))
