@@ -10,28 +10,31 @@ import { AnimatePresence, motion, cubicBezier } from "framer-motion";
 
 const WelcomeMessagesInputs = ({ enabled }: { enabled: boolean }) => {
   const dispatch = useDispatch();
-  const welcomeMsg = useSelector((state: RootState) => state.guildSettings.welcomeMsg);
+  const welcomeMsg = useSelector(
+    (state: RootState) => state.guildSettings.welcomeMsg
+  );
   return (
     <AnimatePresence>
       {enabled && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: -10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
           transition={{
-            ease: cubicBezier(0.83, 0, 0.17, 1),
-            duration: 0.25,
+            duration: 0.4,
+            ease: cubicBezier(0.22, 1, 0.36, 1),
           }}>
           {/* text input  */}
-          <TextArea
-            placeholder="Welcome message"
-            onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
-            value={welcomeMsg}
-            className="mb-4 mt-4 bg-neutral-900"
-          />
-
+          <div className="py-4">
+            <TextArea
+              placeholder="Welcome message"
+              onChange={(e) => dispatch(setWelcomeMsg(e.target.value))}
+              value={welcomeMsg}
+              className="bg-neutral-900"
+            />
+          </div>
           {/* SelectChannel and Variables container  */}
-          <div className="flex justify-between px-2 mb-10 flex-wrap max-w-[670px] w-full">
+          <div className="flex justify-between px-2 flex-wrap max-w-[670px] w-full">
             <Variables />
             {/* Welcome channel selection  */}
             <div>
