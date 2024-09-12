@@ -4,14 +4,14 @@ import Variables from "@/components/dashboard/welcomer/variables";
 
 import type { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { setWelcomeMsg } from "@/redux/features/guildSettings";
+import { setWelcomeMsg } from "@/redux/features/welcomerSettings";
 
 import { AnimatePresence, motion, cubicBezier } from "framer-motion";
 
 const WelcomeMessagesInputs = ({ enabled }: { enabled: boolean }) => {
   const dispatch = useDispatch();
   const welcomeMsg = useSelector(
-    (state: RootState) => state.guildSettings.welcomeMsg
+    (state: RootState) => state.welcomerSettings.welcome.message
   );
   return (
     <AnimatePresence>

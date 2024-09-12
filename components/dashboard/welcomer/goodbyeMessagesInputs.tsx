@@ -4,14 +4,14 @@ import SelectGoodbyeChannel from "@/components/dashboard/welcomer/selectGoodbyeC
 
 import type { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { setGoodbyeMsg } from "@/redux/features/guildSettings";
+import { setGoodbyeMsg } from "@/redux/features/welcomerSettings";
 
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
 
 const GoodbyeMessagesInputs = ({ enabled }: { enabled: boolean }) => {
   const dispatch = useDispatch();
   const goodbyeMsg = useSelector(
-    (state: RootState) => state.guildSettings.goodbyeMsg
+    (state: RootState) => state.welcomerSettings.goodbye.message
   );
 
   return (

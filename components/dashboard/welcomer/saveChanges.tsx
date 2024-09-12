@@ -2,24 +2,34 @@ import SaveChangesBase from "@/components/dashboard/saveChangesBase";
 
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { initialState as guildSettingsInitial } from "@/redux/features/guildSettings";
-import { resetSettings as resetGuildSettings } from "@/redux/features/guildSettings";
+import {
+  initialState as defaultGuildSettingsInitial,
+  type State,
+} from "@/redux/features/welcomerSettings";
+import { resetSettings as resetGuildSettings } from "@/redux/features/welcomerSettings";
 import { setAlert } from "@/redux/features/alert";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const SaveChangesButton = () => {
+const SaveChangesButton = ({
+  guildSettingsInitial,
+}: {
+  guildSettingsInitial: State;
+}) => {
   const dispatch = useDispatch();
 
   const [modified, setModified] = useState(false);
-  const [initial, setInitial] = useState(guildSettingsInitial);
+  const [initial, setInitial] = useState(
+    guildSettingsInitial ?? defaultGuildSettingsInitial
+  );
   const [loading, setLoading] = useState(false);
 
-  const guildSettings = useSelector((state: RootState) => state.guildSettings);
+  const guildSettings = useSelector(
+    (state: RootState) => state.welcomerSettings
+  );
   const guild = useSelector((state: RootState) => state.guild);
 
-  // detecting changes in guildSettings (i'll rename it to welcomerSettings later)
   useEffect(() => {
     let guildSettingsString = JSON.stringify(guildSettings);
     let initialStateString = JSON.stringify(initial);
@@ -33,7 +43,8 @@ const SaveChangesButton = () => {
 
   function updateSettings() {
     // for debugging purposes
-    if (!guild.id) return console.log(`[UpdateGuildSettings] No guild.id was found`);
+    if (!guild.id)
+      return console.log(`[UpdateGuildSettings] No guild.id was found`);
 
     setLoading(true);
 

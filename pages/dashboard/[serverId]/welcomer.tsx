@@ -5,13 +5,15 @@ import GoodbyeMessagesInputs from "@/components/dashboard/welcomer/goodbyeMessag
 import Switch from "@/components/shared/switch";
 
 import { cn } from "@/lib/utils";
+import guildModel from "@/models/guild";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import {
-  toggleGoodbyeMsgs,
-  toggleWelcomeMsgs,
-} from "@/redux/features/guildSettings";
+  setWelcomerSettings,
+  toggleWelcome,
+  toggleGoodbye,
+} from "@/redux/features/welcomerSettings";
 import { setGuildChannels } from "@/redux/features/guildChannels";
 import { setGuild } from "@/redux/features/guild";
 import { setAlert } from "@/redux/features/alert";
@@ -21,20 +23,31 @@ import { RiErrorWarningLine as Warning } from "react-icons/ri";
 import Head from "next/head";
 import fetchGuildChannels from "@/lib/api/fetchGuildChannels";
 import fetchGuildInfo from "@/lib/api/fetchGuildInfo";
+import mongoConnect from "@/lib/mongoConnect";
+import { useEffect } from "react";
 
-const Page = () => {
+const Page = ({
+  persistedWelcomerSettings,
+}: {
+  persistedWelcomerSettings: any;
+}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const welcomeMsgsEnabled = useSelector(
-    (state: RootState) => state.guildSettings.welcomeMsgsEnabled
+    (state: RootState) => state.welcomerSettings.welcome.enabled
   );
   const goodbyeMsgsEnabled = useSelector(
-    (state: RootState) => state.guildSettings.goodbyeMsgsEnabled
+    (state: RootState) => state.welcomerSettings.goodbye.enabled
   );
   const { serverId } = router.query;
 
-  const { data, error } = fetchGuildChannels(serverId);
+  const { data: guildChannels, error } = fetchGuildChannels(serverId);
   const { data: guild, isLoading } = fetchGuildInfo(serverId);
+
+  useEffect(() => {
+    dispatch(setWelcomerSettings(JSON.parse(persistedWelcomerSettings)));
+    dispatch(setGuildChannels(guildChannels));
+  }, []);
 
   if (error) {
     dispatch(
@@ -42,7 +55,6 @@ const Page = () => {
     );
   }
 
-  dispatch(setGuildChannels(data));
   if (guild) {
     dispatch(setGuild(guild));
   }
@@ -66,7 +78,9 @@ const Page = () => {
       {/* page content */}
       <div className="pt-5 pb-48 px-8 md:pt-8 max-w-[100%]">
         {/* fixed element, displayed conditionally  */}
-        <SaveChanges />
+        <SaveChanges
+          guildSettingsInitial={JSON.parse(persistedWelcomerSettings)}
+        />
         {/* Welcome messages ~ text & switch */}
         <div className="flex items-center">
           <h2 className="text-xl md:text-3xl text-gradient font-bold mr-3">
@@ -76,7 +90,7 @@ const Page = () => {
             id="welcomeMsgsCheckbox"
             checked={welcomeMsgsEnabled}
             onCheckedChange={(checked: boolean) =>
-              dispatch(toggleWelcomeMsgs(checked))
+              dispatch(toggleWelcome(checked))
             }
           />
         </div>
@@ -96,7 +110,7 @@ const Page = () => {
             id="goodbyeMsgsCheckbox"
             checked={goodbyeMsgsEnabled}
             onCheckedChange={(checked: boolean) =>
-              dispatch(toggleGoodbyeMsgs(checked))
+              dispatch(toggleGoodbye(checked))
             }
           />
         </div>
@@ -115,3 +129,20 @@ Page.getLayout = function getLayout(page: React.ReactElement) {
 };
 
 export default Page;
+
+export async function getServerSideProps(context: any) {
+  mongoConnect();
+  const guildSettings = await guildModel.findOne({
+    id: context.params.serverId,
+  });
+
+  const persistedWelcomerSettings = guildSettings
+    ? guildSettings.welcomerSettings
+    : null;
+
+  return {
+    props: {
+      persistedWelcomerSettings: JSON.stringify(persistedWelcomerSettings),
+    },
+  };
+}
