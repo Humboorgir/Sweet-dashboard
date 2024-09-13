@@ -16,6 +16,9 @@ export default function fetchGuildChannels(guildId: any) {
           })
       );
 
-  const { data, isLoading, error } = useSWR(guildId ? url : null, guildId ? fetcher : null);
+  const { data, isLoading, error } = useSWR(
+    guildId ? url : null,
+    guildId ? fetcher : null
+  );
   return { data, isLoading, error };
 }

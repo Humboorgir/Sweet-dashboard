@@ -47,7 +47,7 @@ const Page = ({
   useEffect(() => {
     dispatch(setWelcomerSettings(JSON.parse(persistedWelcomerSettings)));
     dispatch(setGuildChannels(guildChannels));
-  }, []);
+  }, [guildChannels]);
 
   if (error) {
     dispatch(
