@@ -18,12 +18,8 @@ export const alert = createSlice({
       state.type = action.payload.type;
       state.message = action.payload.message;
     },
-    resetAlert: (state) => {
-      state.type = initialState.type;
-      state.message = initialState.message;
-    },
   },
 });
 
-export const { setAlert, resetAlert } = alert.actions;
+export const { setAlert } = alert.actions;
 export default alert.reducer;

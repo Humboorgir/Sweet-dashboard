@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import { resetAlert } from "@/redux/features/alert";
+import { useSelector } from "react-redux";
 import type { RootState } from "@/redux/store";
 
 import { MdOutlineErrorOutline as Error } from "react-icons/md";
@@ -12,17 +11,18 @@ import { MdInfoOutline as Info } from "react-icons/md";
 
 const Alert = () => {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
   const alert = useSelector((state: RootState) => state.alert);
 
   useEffect(() => {
-    // TODO: re-implement the timeout properly
     if (!alert.message) return;
     setOpen(true);
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setOpen(false);
-      dispatch(resetAlert());
     }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [alert]);
 
   const customStyles = {
@@ -60,7 +60,7 @@ const Alert = () => {
             opacity: 0,
           }}
           transition={{
-            ease: cubicBezier(0.33, 1, 0.68, 1),
+            ease: cubicBezier(0.22, 1, 0.36, 1),
             duration: 0.2,
           }}
           className={cn(
