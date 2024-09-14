@@ -4,9 +4,9 @@ import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   initialState as defaultGuildSettingsInitial,
+  setWelcomerSettings,
   type State,
 } from "@/redux/features/welcomerSettings";
-import { resetSettings as resetGuildSettings } from "@/redux/features/welcomerSettings";
 import { setAlert } from "@/redux/features/alert";
 
 import axios from "axios";
@@ -38,7 +38,7 @@ const SaveChangesButton = ({
   }, [guildSettings, initial]);
 
   function resetSettings() {
-    dispatch(resetGuildSettings());
+    dispatch(setWelcomerSettings(initial));
   }
 
   function updateSettings() {
